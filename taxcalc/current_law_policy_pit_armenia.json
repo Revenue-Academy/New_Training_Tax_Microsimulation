@@ -645,8 +645,8 @@
   		"out_of_range_maxmsg": "",
   		"out_of_range_action": "stop"
   	},
-  		"_rate_capital": {
-      		"long_name": "Rate of tax on income from capital other than dividends",
+  		"_rate_royalty_curr_law": {
+      		"long_name": "Current rate of tax on income from royalty",
       		"description": "Rate prescribed by law for 2021 is 10% ",
       		"itr_ref": "https://home.kpmg/xx/en/home/insights/2021/07/armenia-thinking-beyond-borders.html",
       		"notes": "",
@@ -672,8 +672,8 @@
       		"out_of_range_maxmsg": "",
       		"out_of_range_action": "stop"
       	},
-  		"_rate_capital_curr_law": {
-      		"long_name": "Rate of tax on income from capital other than dividends under current law",
+  		"_rate_interest_curr_law": {
+      		"long_name": "Current rate of tax on income from interest under current law",
       		"description": "Rate prescribed by law for 2021 is 10% ",
       		"itr_ref": "https://home.kpmg/xx/en/home/insights/2021/07/armenia-thinking-beyond-borders.html",
       		"notes": "",
@@ -754,8 +754,62 @@
   		"out_of_range_maxmsg": "",
   		"out_of_range_action": "stop"
   	},
+  	"_rate_rent_curr_law": {
+  		"long_name": "Current rate of tax on income from rent under current law",
+  		"description": "Rate prescribed by law for 2021 is 10% ",
+  		"itr_ref": "https://home.kpmg/xx/en/home/insights/2021/07/armenia-thinking-beyond-borders.html",
+  		"notes": "",
+  		"row_var": "AYEAR",
+  		"row_label": [
+  			"2021"
+  		],
+  		"start_year": 2021,
+  		"cpi_inflatable": true,
+  		"cpi_inflated": false,
+  		"col_var": "",
+  		"col_label": "",
+  		"boolean_value": false,
+  		"integer_value": false,
+  		"value": [
+  			0.1
+  		],
+  		"range": {
+  			"min": 0,
+  			"max": 1
+  		},
+  		"out_of_range_minmsg": "",
+  		"out_of_range_maxmsg": "",
+  		"out_of_range_action": "stop"
+  	},
   		"_rate_rent_high": {
       		"long_name": "Rate of tax on income from rent above 60mn AMD",
+      		"description": "Rate prescribed by law for 2021 is 10% ",
+      		"itr_ref": "https://home.kpmg/xx/en/home/insights/2021/07/armenia-thinking-beyond-borders.html",
+      		"notes": "",
+      		"row_var": "AYEAR",
+      		"row_label": [
+      			"2021"
+      		],
+      		"start_year": 2021,
+      		"cpi_inflatable": true,
+      		"cpi_inflated": false,
+      		"col_var": "",
+      		"col_label": "",
+      		"boolean_value": false,
+      		"integer_value": false,
+      		"value": [
+      			0.1
+      		],
+      		"range": {
+      			"min": 0,
+      			"max": 1
+      		},
+      		"out_of_range_minmsg": "",
+      		"out_of_range_maxmsg": "",
+      		"out_of_range_action": "stop"
+      	},
+      	"_rate_rent_high_curr_law": {
+      		"long_name": "Current rate of tax on income from rent exceedings AMD 60mn under current law",
       		"description": "Rate prescribed by law for 2021 is 10% ",
       		"itr_ref": "https://home.kpmg/xx/en/home/insights/2021/07/armenia-thinking-beyond-borders.html",
       		"notes": "",
@@ -808,6 +862,33 @@
   		"out_of_range_maxmsg": "",
   		"out_of_range_action": "stop"
   	},
+  	"_rate_sale_prop_dev_curr_law": {
+  		"long_name": "Current rate of tax on income from sale of property by developer under current law",
+  		"description": "Rate prescribed by law for 2021 is 10% ",
+  		"itr_ref": "https://home.kpmg/xx/en/home/insights/2021/07/armenia-thinking-beyond-borders.html",
+  		"notes": "",
+  		"row_var": "AYEAR",
+  		"row_label": [
+  			"2021"
+  		],
+  		"start_year": 2021,
+  		"cpi_inflatable": true,
+  		"cpi_inflated": false,
+  		"col_var": "",
+  		"col_label": "",
+  		"boolean_value": false,
+  		"integer_value": false,
+  		"value": [
+  			0.1
+  		],
+  		"range": {
+  			"min": 0,
+  			"max": 1
+  		},
+  		"out_of_range_minmsg": "",
+  		"out_of_range_maxmsg": "",
+  		"out_of_range_action": "stop"
+  	},
   	"_rate_sale_prop": {
   		"long_name": "Rate of tax on income from sale of property by other than developers",
   		"description": "Rate prescribed by law for 2021 is 10% ",
@@ -835,8 +916,62 @@
   		"out_of_range_maxmsg": "",
   		"out_of_range_action": "stop"
   	},
+  	"_rate_sale_prop_curr_law": {
+  		"long_name": "Current rate of tax on income from sale of property under current law",
+  		"description": "Rate prescribed by law for 2021 is 10% ",
+  		"itr_ref": "https://home.kpmg/xx/en/home/insights/2021/07/armenia-thinking-beyond-borders.html",
+  		"notes": "",
+  		"row_var": "AYEAR",
+  		"row_label": [
+  			"2021"
+  		],
+  		"start_year": 2021,
+  		"cpi_inflatable": true,
+  		"cpi_inflated": false,
+  		"col_var": "",
+  		"col_label": "",
+  		"boolean_value": false,
+  		"integer_value": false,
+  		"value": [
+  			0.1
+  		],
+  		"range": {
+  			"min": 0,
+  			"max": 1
+  		},
+  		"out_of_range_minmsg": "",
+  		"out_of_range_maxmsg": "",
+  		"out_of_range_action": "stop"
+  	},
   	"_rate_stocks": {
   		"long_name": "Rate of tax on income from sale of securities",
+  		"description": "Rate prescribed by law for 2021 is 10% ",
+  		"itr_ref": "https://home.kpmg/xx/en/home/insights/2021/07/armenia-thinking-beyond-borders.html",
+  		"notes": "",
+  		"row_var": "AYEAR",
+  		"row_label": [
+  			"2021"
+  		],
+  		"start_year": 2021,
+  		"cpi_inflatable": true,
+  		"cpi_inflated": false,
+  		"col_var": "",
+  		"col_label": "",
+  		"boolean_value": false,
+  		"integer_value": false,
+  		"value": [
+  			0.1
+  		],
+  		"range": {
+  			"min": 0,
+  			"max": 1
+  		},
+  		"out_of_range_minmsg": "",
+  		"out_of_range_maxmsg": "",
+  		"out_of_range_action": "stop"
+  	},
+  	"_rate_stocks_curr_law": {
+  		"long_name": "Current rate of tax on income from interest under current law",
   		"description": "Rate prescribed by law for 2021 is 10% ",
   		"itr_ref": "https://home.kpmg/xx/en/home/insights/2021/07/armenia-thinking-beyond-borders.html",
   		"notes": "",
