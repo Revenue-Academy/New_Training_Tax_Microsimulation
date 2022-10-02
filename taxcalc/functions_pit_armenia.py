@@ -293,11 +293,20 @@ def cal_tti_wages_behavior(rate1, rate2, rate3, rate4, tbrk1, tbrk2, tbrk3,
 
 "Calculation behavior"
 @iterate_jit(nopython=True)
-def cal_tti_c_behavior(rate_capital, rate_capital_curr_law, 
-                      rate_dividends, rate_dividends_curr_law,
+def cal_tti_c_behavior(rate_royalty, rate_royalty_curr_law, 
+                       rate_interest, rate_interest_curr_law, 
+                       rate_rent, rate_rent_curr_law, 
+                       rate_rent_high, rate_rent_high_curr_law, 
+                       rate_sale_prop_dev, rate_sale_prop_dev_curr_law, 
+                       rate_sale_prop, rate_sale_prop_curr_law, 
+                       rate_stocks, rate_stocks_curr_law, 
+                       rate_dividends, rate_dividends_curr_law,
                       elasticity_pit_capital_income_threshold,
                       elasticity_pit_capital_income_value,
-                      tti_all, tti_dividends, tti_c_all_behavior, tti_c_div_behavior):
+                      tti_royalty, tti_interest, tti_rent, tti_rent_high, tti_sale_prop, tti_sale_prop_dev, tti_stocks,
+                      tti_dividends, tti_all, tti_c_royalty_behavior, tti_c_interest_behavior, tti_c_rent_behavior,
+                      tti_c_rent_high_behavior,tti_c_sale_prop_dev_behavior, tti_c_sale_prop_behavior, 
+                      tti_c_sale_stocks_behavior, tti_c_div_behavior):
     """
     Compute capital income under behavioral response
     """
@@ -331,18 +340,48 @@ def cal_tti_c_behavior(rate_capital, rate_capital_curr_law,
     else:
         elasticity=elasticity_pit_capital_income_value2
     
-    frac_change_net_of_pit_capital_income_rate_all = ((1-rate_capital)-(1-rate_capital_curr_law))/(1-rate_capital_curr_law)
-    frac_change_tti_c_all = elasticity*(frac_change_net_of_pit_capital_income_rate_all) 
+    frac_change_net_of_pit_royalty_income_rate = ((1-rate_royalty)-(1-rate_royalty_curr_law))/(1-rate_royalty_curr_law)
+    frac_change_tti_royalty = elasticity*(frac_change_net_of_pit_royalty_income_rate) 
+    frac_change_net_of_pit_interest_income_rate = ((1-rate_interest)-(1-rate_interest_curr_law))/(1-rate_interest_curr_law)
+    frac_change_tti_interest = elasticity*(frac_change_net_of_pit_interest_income_rate)
+    frac_change_net_of_pit_rent_income_rate = ((1-rate_rent)-(1-rate_rent_curr_law))/(1-rate_rent_curr_law)
+    frac_change_tti_rent = elasticity*(frac_change_net_of_pit_rent_income_rate)
+    frac_change_net_of_pit_rent_high_income_rate = ((1-rate_rent_high)-(1-rate_rent_high_curr_law))/(1-rate_rent_high_curr_law)
+    frac_change_tti_rent_high = elasticity*(frac_change_net_of_pit_rent_high_income_rate)
+    frac_change_net_of_pit_prop_dev_income_rate = ((1-rate_sale_prop_dev)-(1-rate_sale_prop_dev_curr_law))/(1-rate_sale_prop_dev_curr_law)
+    frac_change_tti_sale_prop_dev = elasticity*(frac_change_net_of_pit_prop_dev_income_rate)
+    frac_change_net_of_pit_prop_income_rate = ((1-rate_sale_prop)-(1-rate_sale_prop_curr_law))/(1-rate_sale_prop_curr_law)
+    frac_change_tti_sale_prop = elasticity*(frac_change_net_of_pit_prop_income_rate)
+    frac_change_net_of_pit_stocks_income_rate = ((1-rate_stocks)-(1-rate_stocks_curr_law))/(1-rate_stocks_curr_law)
+    frac_change_tti_stocks = elasticity*(frac_change_net_of_pit_stocks_income_rate)
     frac_change_net_of_pit_capital_income_rate_div = ((1-rate_dividends)-(1-rate_dividends_curr_law))/(1-rate_dividends_curr_law)
     frac_change_tti_c_div = elasticity*(frac_change_net_of_pit_capital_income_rate_div)   
-    tti_c_all_behavior = tti_all*(1+frac_change_tti_c_all)    
+    tti_c_royalty_behavior = tti_royalty*(1+frac_change_tti_royalty)    
+    tti_c_interest_behavior = tti_interest*(1+frac_change_tti_interest)   
+    tti_c_rent_behavior = tti_rent*(1+frac_change_tti_rent)   
+    tti_c_rent_high_behavior = tti_rent*(1+frac_change_tti_rent_high) 
+    tti_c_sale_prop_dev_behavior = tti_sale_prop_dev*(1+frac_change_tti_sale_prop_dev) 
+    tti_c_sale_prop_behavior = tti_sale_prop*(1+frac_change_tti_sale_prop) 
+    tti_c_sale_stocks_behavior = tti_stocks*(1+frac_change_tti_stocks) 
     tti_c_div_behavior = tti_dividends*(1+frac_change_tti_c_div)
-    return tti_c_all_behavior, tti_c_div_behavior
+    return tti_c_royalty_behavior, tti_c_interest_behavior, tti_c_rent_behavior,tti_c_rent_high_behavior,tti_c_sale_prop_dev_behavior, tti_c_sale_prop_behavior, tti_c_sale_stocks_behavior, tti_c_div_behavior
 
 "Calculation for PIT from capital incorporating behavioural response"
 @iterate_jit(nopython=True)
-def cal_pit_cap_behavior(rate_capital, rate_dividends, tti_c_all_behavior, tti_c_div_behavior, pit_c_behavior):
-    pit_c_behavior = (tti_c_all_behavior*rate_capital) + (tti_c_div_behavior*rate_dividends)
+def cal_pit_cap_behavior(rate_royalty, rate_interest, rate_rent, rate_rent_high, rate_sale_prop_dev, rate_sale_prop, rate_stocks, rate_dividends,
+                         tti_c_royalty_behavior, tti_c_interest_behavior, tti_c_rent_behavior,tti_c_rent_high_behavior,tti_c_sale_prop_dev_behavior, 
+                         tti_c_sale_prop_behavior, tti_c_sale_stocks_behavior, tti_c_div_behavior, pit_cars, pit_c_behavior):
+    pit_c_behavior = ((tti_c_royalty_behavior*rate_royalty) + 
+                      (tti_c_interest_behavior*rate_interest) + 
+                      (tti_c_rent_behavior*rate_rent) + 
+                      (tti_c_rent_high_behavior*rate_rent_high) +
+                      (tti_c_sale_prop_dev_behavior*rate_sale_prop_dev) + 
+                      (tti_c_sale_prop_behavior*rate_sale_prop) +
+                      (tti_c_sale_stocks_behavior*rate_stocks) +
+                      (tti_c_div_behavior*rate_dividends)+
+                      (pit_cars))
+                      
+                     
     return pit_c_behavior
 
 "Calculation for PIT from labor income incorporating behavioural response"
