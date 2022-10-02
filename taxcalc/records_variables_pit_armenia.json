@@ -29,6 +29,15 @@
 			"cross_year": "No",
 			"attribute": "No"
 		},
+		"civil_contract": {
+			"type": "float",
+			"desc": "Gross income from civil contracts ",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
 		"other_income": {
 			"type": "float",
 			"desc": "Gross income from other sources",
@@ -47,15 +56,6 @@
 			"cross_year": "No",
 			"attribute": "No"
 		},
-		"income_tax": {
-			"type": "float",
-			"desc": "Personal income tax",
-			"form": {
-				"2021": "pit_armenia"
-			},
-			"cross_year": "No",
-			"attribute": "No"
-		},
 		"social_fee": {
 			"type": "float",
 			"desc": "Social security contributions",
@@ -64,19 +64,83 @@
 			},
 			"cross_year": "No",
 			"attribute": "No"
+		
 		},
-		"civil_contract": {
+		"royalty": {
 			"type": "float",
-			"desc": "Gross income from civil contracts ",
+			"desc": "royalty income from copyrights, permits ",
 			"form": {
 				"2021": "pit_armenia"
 			},
 			"cross_year": "No",
 			"attribute": "No"
 		},
-		"total_income": {
+		"interest": {
 			"type": "float",
-			"desc": "Gross income from civil contracts ",
+			"desc": "interest income from bank deposits, other deposits",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"rent": {
+			"type": "float",
+			"desc": "rental income from letting out of buildings, property",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"rent_high": {
+			"type": "float",
+			"desc": "rental income exceedings 60mn AMD ",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"sale_prop_dev": {
+			"type": "float",
+			"desc": "income from sale of property by a developer",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"sale_prop": {
+			"type": "float",
+			"desc": "income from sale of property by a non-developer individual",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"tax_cars": {
+			"type": "float",
+			"desc": "tax from sale of car as entrepreneurial activity",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"stocks": {
+			"type": "float",
+			"desc": "income from securities transaction",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"dividends": {
+			"type": "float",
+			"desc": "income from dividends received from companies",
 			"form": {
 				"2021": "pit_armenia"
 			},
@@ -85,100 +149,228 @@
 		}
 	},
 	"calc": {
-		"min_threshold_social_p": {
+		"max_annual_income_low_ssc": {
 			"type": "float",
-			"desc": "Minimum base_wage",
+			"desc": "Maximum annual wage for low rate of social security contribution",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
-		"max_threshold_social_p": {
+		"max_annual_income_ssc": {
 			"type": "float",
-			"desc": "Maximum base_wage",
-			"form": {
-				"2021": "pit_armenia"
-			}
-		},
-		"deduction_amount_social_p": {
-			"type": "float",
-			"desc": "Minimum social security contributions calculated from min_base_wage",
+			"desc": "Maximum annual wage (cap) for social security",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
 		"base_social": {
 			"type": "float",
-			"desc": "Maximum social security contributions calculated from max_base_salary",
+			"desc": "Base for calculation of social security",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
-		"max_cap_social_p": {
-    			"type": "float",
-    			"desc": "Maximum social security contributions calculated from max_base_salary",
-    			"form": {
-    				"2021": "pit_armenia"
-    			}
-    	},
 		"cal_ssc": {
 			"type": "float",
-			"desc": "Calculated Social Security Contributions computed as 0.2675 of Gross Income",
+			"desc": "Calculated Social Security Contributions ",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
-		"calculation_base": {
-			"type": "int",
-			"desc": "Calculated personal allowance change (%) if personal allowance change is introduced",
-			"form": {
-				"2021": "pit_armenia"
-			}
-		},
-		"pit_calc": {
+		"tti_wages": {
 			"type": "float",
-			"desc": "Tax base calculated for wages",
+			"desc": "Calculated taxable income from wages",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
-		"te": {
+		"tti_royalty": {
 			"type": "float",
-			"desc": "Tax base calculated for wages",
+			"desc": "Calculated taxable income from royalty",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
-		"tti_w_I": {
+		"tti_interest": {
 			"type": "float",
-			"desc": "Pit liability from wages (pit-ssc-personal allowance)*tax rate",
+			"desc": "Calculated taxable income from interest",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
-		"tti_w_I_behavior": {
-			"type": "int",
-			"desc": "Tax Expenditures imputed",
-			"form": {
-				"2021": "pit_armenia"
-			}
-		},
-		"pit_w_I": {
+		"tti_rent": {
 			"type": "float",
-			"desc": "Tax base calulated for income from agriculture and medicine",
+			"desc": "Calculated taxable income from rent",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"tti_rent_high": {
+			"type": "float",
+			"desc": "Calculated taxable income from rent higher than 60mn AMD",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"tti_sale_prop_dev": {
+			"type": "float",
+			"desc": "Calculated taxable income from sale of property by developers",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"tti_sale_prop": {
+			"type": "float",
+			"desc": "Calculated taxable income from sale of property by other than developers",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"tti_stocks": {
+			"type": "float",
+			"desc": "Calculated taxable income from sale of securities",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"tti_dividends": {
+			"type": "float",
+			"desc": "Calculated taxable income from dividends",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"tti_all": {
+			"type": "float",
+			"desc": "Calculated taxable income from all sources except dividends",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"total_gross_income": {
+			"type": "float",
+			"desc": "Calculated gross total income from all sources",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		
+		"pit_wages": {
+			"type": "float",
+			"desc": "Calculated tax on income from wages",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_royalty": {
+			"type": "float",
+			"desc": "Calculated tax on income from interest",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_interest": {
+			"type": "float",
+			"desc": "Calculated tax on income from interest",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_rent": {
+			"type": "float",
+			"desc": "Calculated tax on income from wages",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_rent_high": {
+			"type": "float",
+			"desc": "Calculated tax on income from rent higher than AMD 60mn",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_sale_prop": {
+			"type": "float",
+			"desc": "Calculated tax on income from sale of property",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_sale_prop_dev": {
+			"type": "float",
+			"desc": "Calculated tax on income from sale of property by developer",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_cars": {
+			"type": "float",
+			"desc": "Calculated tax on income from sale of cars",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_stocks": {
+			"type": "float",
+			"desc": "Calculated tax on income from sale of securities",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_dividends": {
+			"type": "float",
+			"desc": "Calculated tax on income from dividends",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
 		"pitax": {
 			"type": "float",
-			"desc": "Total post tax income",
+			"desc": "Total tax on income with behavioral response",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
-		"total_net_income": {
+		"tti_wages_behavior": {
 			"type": "float",
-			"desc": "Total post tax income",
+			"desc": "Taxable income from wages under behavioral response",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"tti_c_all_behavior": {
+			"type": "int",
+			"desc": "Taxable income from capital excluding dividends under behavioral response",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"tti_c_div_behavior": {
+			"type": "int",
+			"desc": "Taxable income from dividends under behavioral response",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_c_behavior": {
+			"type": "float",
+			"desc": "Tax on capital income and dividends under behavioral response",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_w_behavior": {
+			"type": "float",
+			"desc": "Tax on wages under behavioral response",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		
+		"pitax_all": {
+			"type": "float",
+			"desc": "Total tax without behavioral response",
 			"form": {
 				"2021": "pit_armenia"
 			}

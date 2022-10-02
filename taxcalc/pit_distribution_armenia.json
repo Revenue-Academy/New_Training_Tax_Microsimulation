@@ -1,12 +1,12 @@
 {
   "DIST_VARIABLES": [
     "weight",
-    "total_income",
+    "total_gross_income",
     "pitax"
   ],
   "DIST_TABLE_COLUMNS": [
     "weight",
-    "total_income",
+    "total_gross_income",
     "pitax"
   ],
   "DIST_TABLE_LABELS": [
@@ -60,5 +60,5 @@
     10000000.0,
     9e+99
   ],
-  "income_measure": "total_income"
+  "income_measure": "total_gross_income"
 }

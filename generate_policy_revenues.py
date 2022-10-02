@@ -170,6 +170,7 @@ def generate_policy_revenues():
     adjust_behavior = 0
     for tax_type in tax_list:
         adjust_behavior = adjust_behavior or global_variables[tax_type+'_adjust_behavior']
+        #adjust_behavior = global_variables[tax_type+'_adjust_behavior']
     
     chart_list = []
     distribution_json_filename = {}
@@ -187,7 +188,7 @@ def generate_policy_revenues():
  
     f = open('reform.json')
     block_selected_dict = json.load(f)
-    #print("block_selected_dict from json",block_selected_dict)
+    print("block_selected_dict from json",block_selected_dict)
     
     # create Policy object containing current-law policy
     pol = Policy(DEFAULTS_FILENAME=global_variables['DEFAULTS_FILENAME'])
@@ -211,7 +212,7 @@ def generate_policy_revenues():
             f = open('taxcalc/'+tax_type+'_elasticity_selection.json')
             elasticity_dict[tax_type] = json.load(f)
             if len(elasticity_dict[tax_type])>0:
-                #print(elasticity_dict)
+                print(elasticity_dict)
                 block_selected_dict = concat_dicts(block_selected_dict, elasticity_dict[tax_type])
         #print('block_selected_dict in adjust behavior',block_selected_dict)
         pol3 = Policy(DEFAULTS_FILENAME=global_variables['DEFAULTS_FILENAME'])   
