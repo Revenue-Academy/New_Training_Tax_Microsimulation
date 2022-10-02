@@ -412,7 +412,7 @@ class Calculator(object):
             for i in range(len(self.pit_function_names)):
                 #print('function name ', self.pit_function_names[str(i)])
                 func_name = globals()[self.pit_function_names[str(i)]]
-                #print(function_names[str(i)])
+                #print(func_name)
                 func_name(self.__policy, self.__records)
         # GST calculations
         if self.gstrecords is not None:
