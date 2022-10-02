@@ -22,14 +22,15 @@
  "20": "cal_pit_sale_prop_dev",
  "21": "cal_pit_sale_prop",
  "22": "cal_pit_cars",
- "23": "cal_pit_stocks",
- "24": "cal_pit_dividends",
- "25": "cal_pit_all",
- "26": "cal_tti_wages_behavior",
- "27": "cal_tti_c_behavior",
- "28": "cal_pit_cap_behavior",
- "29": "cal_pit_w_behavior",
- "30": "cal_pit_behavior" 
+ "23": "cal_pit_limitation",
+ "24": "cal_pit_stocks",
+ "25": "cal_pit_dividends",
+ "26": "cal_pit_all",
+ "27": "cal_tti_wages_behavior",
+ "28": "cal_tti_c_behavior",
+ "29": "cal_pit_cap_behavior",
+ "30": "cal_pit_w_behavior",
+ "31": "cal_pit_behavior" 
 }
 
 

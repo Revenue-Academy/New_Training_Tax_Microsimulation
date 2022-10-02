@@ -215,6 +215,12 @@ def cal_pit_cars(tax_cars):
     pit_cars = tax_cars
     return (pit_cars)
 
+"Calculation for total tax from sale of cars"
+@iterate_jit(nopython=True)
+def cal_pit_limitation(tax_limitations):
+    pit_limitations = tax_limitations
+    return (pit_limitations)
+
 "Calculation for total tax from sale of securities"
 @iterate_jit(nopython=True)
 def cal_pit_stocks(tti_stocks, rate_stocks, pit_stocks):
@@ -229,8 +235,8 @@ def cal_pit_dividends(tti_dividends, rate_dividends, pit_dividends):
 
 "Calculation for total tax from all sources"
 @iterate_jit(nopython=True)
-def cal_pit_all(pit_wages, pit_royalty, pit_interest, pit_rent, pit_rent_high, pit_sale_prop, pit_sale_prop_dev, pit_cars, pit_stocks, pit_dividends, pitax_all):
-    pitax_all = pit_wages + pit_royalty+pit_interest+pit_rent+pit_rent_high+pit_sale_prop+pit_sale_prop_dev+pit_cars+pit_stocks+pit_dividends
+def cal_pit_all(pit_wages, pit_royalty, pit_interest, pit_rent, pit_rent_high, pit_sale_prop, pit_sale_prop_dev, pit_cars, pit_limitations, pit_stocks, pit_dividends, pitax_all):
+    pitax_all = pit_wages + pit_royalty+pit_interest+pit_rent+pit_rent_high+pit_sale_prop+pit_sale_prop_dev+pit_cars+pit_limitations+pit_stocks+pit_dividends
     return (pitax_all)
 
 
@@ -370,7 +376,7 @@ def cal_tti_c_behavior(rate_royalty, rate_royalty_curr_law,
 @iterate_jit(nopython=True)
 def cal_pit_cap_behavior(rate_royalty, rate_interest, rate_rent, rate_rent_high, rate_sale_prop_dev, rate_sale_prop, rate_stocks, rate_dividends,
                          tti_c_royalty_behavior, tti_c_interest_behavior, tti_c_rent_behavior,tti_c_rent_high_behavior,tti_c_sale_prop_dev_behavior, 
-                         tti_c_sale_prop_behavior, tti_c_sale_stocks_behavior, tti_c_div_behavior, pit_cars, pit_c_behavior):
+                         tti_c_sale_prop_behavior, tti_c_sale_stocks_behavior, tti_c_div_behavior, pit_cars, pit_limitations, pit_c_behavior):
     pit_c_behavior = ((tti_c_royalty_behavior*rate_royalty) + 
                       (tti_c_interest_behavior*rate_interest) + 
                       (tti_c_rent_behavior*rate_rent) + 
@@ -379,7 +385,7 @@ def cal_pit_cap_behavior(rate_royalty, rate_interest, rate_rent, rate_rent_high,
                       (tti_c_sale_prop_behavior*rate_sale_prop) +
                       (tti_c_sale_stocks_behavior*rate_stocks) +
                       (tti_c_div_behavior*rate_dividends)+
-                      (pit_cars))
+                      (pit_cars)+(pit_limitations))
                       
                      
     return pit_c_behavior

@@ -37,9 +37,9 @@
   "vat_display_distribution_table_bydecile": 0,
   "vat_display_revenue_table": 1,
   "kakwani_list": [
-    0.6208264697454945,
-    0.0022390753482931514,
-    0.001980979458460874
+    0.6641565729557257,
+    -0.009312227396242823,
+    -0.009427349615679259
   ],
   "start_year": "2022",
   "end_year": "2027",
@@ -80,7 +80,7 @@
   "pit_id_var": "id_n",
   "pit_functions_names_filename": "function_names_pit_armenia.json",
   "attribute_vars": [],
-  "pit_adjust_behavior": 1,
+  "pit_adjust_behavior": 0,
   "cit_adjust_behavior": 0,
   "vat_adjust_behavior": 0,
   "pit_distribution_table": 1,
