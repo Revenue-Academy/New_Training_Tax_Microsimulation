@@ -129,6 +129,15 @@
 			"cross_year": "No",
 			"attribute": "No"
 		},
+		"tax_limitations": {
+			"type": "float",
+			"desc": "tax from employees who do not submit detailed income from sources",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
 		"stocks": {
 			"type": "float",
 			"desc": "income from securities transaction",
@@ -305,6 +314,13 @@
 			}
 		},
 		"pit_cars": {
+			"type": "float",
+			"desc": "Calculated tax on income from sale of cars",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
+		"pit_limitations": {
 			"type": "float",
 			"desc": "Calculated tax on income from sale of cars",
 			"form": {
