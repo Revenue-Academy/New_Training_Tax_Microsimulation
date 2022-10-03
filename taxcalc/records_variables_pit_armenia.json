@@ -356,56 +356,56 @@
 			}
 		},
 		"tti_c_royalty_behavior": {
-			"type": "int",
+			"type": "float",
 			"desc": "Taxable income from capital excluding dividends under behavioral response",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
 		"tti_c_interest_behavior": {
-			"type": "int",
+			"type": "float",
 			"desc": "Taxable income from capital excluding dividends under behavioral response",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
 		"tti_c_rent_behavior": {
-			"type": "int",
+			"type": "float",
 			"desc": "Taxable income from capital excluding dividends under behavioral response",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
 		"tti_c_rent_high_behavior": {
-			"type": "int",
+			"type": "float",
 			"desc": "Taxable income from capital excluding dividends under behavioral response",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
 		"tti_c_sale_prop_dev_behavior": {
-			"type": "int",
+			"type": "float",
 			"desc": "Taxable income from capital excluding dividends under behavioral response",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
 		"tti_c_sale_prop_behavior": {
-			"type": "int",
+			"type": "float",
 			"desc": "Taxable income from capital excluding dividends under behavioral response",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
 		"tti_c_sale_stocks_behavior": {
-			"type": "int",
+			"type": "float",
 			"desc": "Taxable income from capital excluding dividends under behavioral response",
 			"form": {
 				"2021": "pit_armenia"
 			}
 		},
 		"tti_c_div_behavior": {
-			"type": "int",
+			"type": "float",
 			"desc": "Taxable income from dividends under behavioral response",
 			"form": {
 				"2021": "pit_armenia"

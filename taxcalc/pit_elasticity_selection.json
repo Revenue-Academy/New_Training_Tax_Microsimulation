@@ -3,9 +3,9 @@
     "selected_item": "elasticity_pit_taxable_income_value",
     "selected_value": [
       [
-        "0.0",
-        "0.6",
-        "0.7"
+        0.0,
+        0.0,
+        0.0
       ]
     ],
     "selected_year": [
@@ -29,9 +29,9 @@
     "selected_item": "elasticity_pit_capital_income_value",
     "selected_value": [
       [
-        "0.1",
-        "0.3",
-        "0.5"
+        "0.6",
+        "0.6",
+        "0.6"
       ]
     ],
     "selected_year": [

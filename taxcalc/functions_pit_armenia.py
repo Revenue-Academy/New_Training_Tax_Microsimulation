@@ -64,17 +64,17 @@ def cal_ssc_fun(social_fee, base_social, min_income_for_ssc,max_annual_income_lo
     """
     
     if social_fee ==0 and base_social> 1:
-        calc_ssc = 0
+        cal_ssc = 0
     elif base_social <= min_income_for_ssc:
-        calc_ssc = 0.
+        cal_ssc = 0.
     elif (base_social >=min_income_for_ssc) and (base_social <= max_annual_income_low_ssc):
-       calc_ssc = base_social * rate_sp_1  #policy is to pay ssc on entire base if it exceeds threshold
+       cal_ssc = base_social * rate_sp_1  #policy is to pay ssc on entire base if it exceeds threshold
     #elif (base_social >=min_income_for_ssc) and (base_social <= max_annual_income_low_ssc):
-        #calc_ssc = (base_social - min_income_for_ssc)  * rate_sp_1  #policy is to pay ssc on portion above min threshold 
+        #cal_ssc = (base_social - min_income_for_ssc)  * rate_sp_1  #policy is to pay ssc on portion above min threshold 
     elif (base_social >=max_annual_income_low_ssc) and (base_social <=max_annual_income_ssc): 
-       calc_ssc =  (max_annual_income_low_ssc * rate_sp_1) +  max(0., (base_social - max_annual_income_low_ssc)*rate_sp_2)
+       cal_ssc =  (max_annual_income_low_ssc * rate_sp_1) +  max(0., (base_social - max_annual_income_low_ssc)*rate_sp_2)
     elif base_social > max_annual_income_ssc:
-       calc_ssc = (max_annual_income_low_ssc * rate_sp_1) +  max(0., (max_annual_income_ssc - max_annual_income_low_ssc)*rate_sp_2)
+       cal_ssc = (max_annual_income_low_ssc * rate_sp_1) +  max(0., (max_annual_income_ssc - max_annual_income_low_ssc)*rate_sp_2)
     return  (cal_ssc)
 
 
@@ -370,7 +370,7 @@ def cal_tti_c_behavior(rate_royalty, rate_royalty_curr_law,
     tti_c_royalty_behavior = tti_royalty*(1+frac_change_tti_royalty)    
     tti_c_interest_behavior = tti_interest*(1+frac_change_tti_interest)   
     tti_c_rent_behavior = tti_rent*(1+frac_change_tti_rent)   
-    tti_c_rent_high_behavior = tti_rent*(1+frac_change_tti_rent_high) 
+    tti_c_rent_high_behavior = tti_rent_high*(1+frac_change_tti_rent_high) 
     tti_c_sale_prop_dev_behavior = tti_sale_prop_dev*(1+frac_change_tti_sale_prop_dev) 
     tti_c_sale_prop_behavior = tti_sale_prop*(1+frac_change_tti_sale_prop) 
     tti_c_sale_stocks_behavior = tti_stocks*(1+frac_change_tti_stocks) 
