@@ -64,17 +64,19 @@ def cal_ssc_fun(social_fee, base_social, min_income_for_ssc,max_annual_income_lo
     """
     
     if social_fee ==0 and base_social> 1:
-        calc_ssc = 0
+        cal_ssc = 0.0
     elif base_social <= min_income_for_ssc:
-        calc_ssc = 0.
+        cal_ssc = 0.0
     elif (base_social >=min_income_for_ssc) and (base_social <= max_annual_income_low_ssc):
-       calc_ssc = base_social * rate_sp_1  #policy is to pay ssc on entire base if it exceeds threshold
+       cal_ssc = base_social * rate_sp_1  #policy is to pay ssc on entire base if it exceeds threshold
     #elif (base_social >=min_income_for_ssc) and (base_social <= max_annual_income_low_ssc):
         #calc_ssc = (base_social - min_income_for_ssc)  * rate_sp_1  #policy is to pay ssc on portion above min threshold 
     elif (base_social >=max_annual_income_low_ssc) and (base_social <=max_annual_income_ssc): 
-       calc_ssc =  (max_annual_income_low_ssc * rate_sp_1) +  max(0., (base_social - max_annual_income_low_ssc)*rate_sp_2)
+       cal_ssc =  (max_annual_income_low_ssc * rate_sp_1) +  max(0., (base_social - max_annual_income_low_ssc)*rate_sp_2)
     elif base_social > max_annual_income_ssc:
-       calc_ssc = (max_annual_income_low_ssc * rate_sp_1) +  max(0., (max_annual_income_ssc - max_annual_income_low_ssc)*rate_sp_2)
+       cal_ssc = (max_annual_income_low_ssc * rate_sp_1) +  max(0., (max_annual_income_ssc - max_annual_income_low_ssc)*rate_sp_2)
+    else: 
+        cal_ssc = 0.0
     return  (cal_ssc)
 
 
