@@ -81,8 +81,13 @@ def cal_ssc_fun(social_fee, base_social, min_income_for_ssc,max_annual_income_lo
 
 "Calculation for tax base for income from wages"
 @iterate_jit(nopython=True)
-def cal_tti_wage(salary, civil_contract,other_income,deduction,tti_wages):
+def cal_tti_wage(percent_ssc_deductible, cal_ssc, salary, civil_contract,other_income,deduction,tti_wages):
     tti_wages=(salary + civil_contract + other_income) - deduction
+    allowed_ssc = cal_ssc*percent_ssc_deductible
+    if tti_wages>=allowed_ssc:
+        tti_wages = tti_wages-allowed_ssc
+    else:
+        tti_wages=0
     return (tti_wages)
 
 "Calculation for tax base for income from royalty"
@@ -412,7 +417,7 @@ def cal_pit_w_behavior(tti_wages_behavior, rate1, rate2, rate3, rate4, tbrk1, tb
 
 
 @iterate_jit(nopython=True)
-def cal_pit_behavior(pit_c_behavior,pit_w_behavior, pitax):
+def cal_pit_behavior(pit_c_behavior,pit_w_behavior, pitax, cal_ssc):
     """
     Explanation about total PIT calculation
     
@@ -441,7 +446,12 @@ def cal_pit_behavior(pit_c_behavior,pit_w_behavior, pitax):
     """
     
     pitax = pit_c_behavior+pit_w_behavior
-   
+    
+
+        
+    #pitax = pitax-min(cal_ssc*percent_deductible,pitax)
+  
+     
     return (pitax)
 
 
