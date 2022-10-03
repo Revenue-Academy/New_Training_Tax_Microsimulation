@@ -28,7 +28,7 @@
   "vat_function_names_filename": "vat_function_names.json",
   "vat_distribution_json_filename": "vat_distribution.json",
   "pit_display_distribution_table_byincome": 0,
-  "pit_display_distribution_table_bydecile": 1,
+  "pit_display_distribution_table_bydecile": 0,
   "pit_display_revenue_table": 1,
   "cit_display_distribution_table_byincome": 0,
   "cit_display_distribution_table_bydecile": 0,
@@ -36,11 +36,7 @@
   "vat_display_distribution_table_byincome": 0,
   "vat_display_distribution_table_bydecile": 0,
   "vat_display_revenue_table": 1,
-  "kakwani_list": [
-    0.6641565729557257,
-    -0.009312227396242823,
-    -0.009427349615679259
-  ],
+  "kakwani_list": [],
   "start_year": "2022",
   "end_year": "2027",
   "pit_data_start_year": 2021,
@@ -65,11 +61,7 @@
   "vat_id_var": "id_n",
   "charts_ready": 1,
   "chart_list": [
-    "pit_revenue_projection",
-    "pit_distribution_table",
-    "pit_distribution_table_top1",
-    "pit_distribution_table_income_bins",
-    "pit_etr"
+    "pit_revenue_projection"
   ],
   "show_error_log": 0,
   "verbose": 0,
@@ -83,7 +75,7 @@
   "pit_adjust_behavior": 0,
   "cit_adjust_behavior": 0,
   "vat_adjust_behavior": 0,
-  "pit_distribution_table": 1,
+  "pit_distribution_table": 0,
   "pit_display_distribution_table": 0,
   "pit_display_distribution_table_by_attribute": 0,
   "cit_distribution_table": 0,
