@@ -5,7 +5,7 @@
       [
         "0.0",
         "0.6",
-        "0.6"
+        "0.7"
       ]
     ],
     "selected_year": [
@@ -29,9 +29,9 @@
     "selected_item": "elasticity_pit_capital_income_value",
     "selected_value": [
       [
-        0.0,
-        0.0,
-        0.0
+        "0.1",
+        "0.3",
+        "0.5"
       ]
     ],
     "selected_year": [
