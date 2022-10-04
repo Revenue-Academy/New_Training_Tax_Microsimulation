@@ -56,6 +56,15 @@
 			"cross_year": "No",
 			"attribute": "No"
 		},
+		"mortgage_credits": {
+			"type": "float",
+			"desc": "Cashback of mortgage",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
 		"social_fee": {
 			"type": "float",
 			"desc": "Social security contributions",
@@ -425,7 +434,13 @@
 				"2021": "pit_armenia"
 			}
 		},
-		
+		"pitax_before_credits": {
+			"type": "float",
+			"desc": "PIT before tax credits",
+			"form": {
+				"2021": "pit_armenia"
+			}
+		},
 		"pitax_all": {
 			"type": "float",
 			"desc": "Total tax without behavioral response",

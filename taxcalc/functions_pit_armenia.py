@@ -417,7 +417,7 @@ def cal_pit_w_behavior(tti_wages_behavior, rate1, rate2, rate3, rate4, tbrk1, tb
 
 
 @iterate_jit(nopython=True)
-def cal_pit_behavior(pit_c_behavior,pit_w_behavior, pitax, cal_ssc):
+def cal_pit_behavior(pit_c_behavior,pit_w_behavior, pitax_before_credits, cal_ssc):
     """
     Explanation about total PIT calculation
     
@@ -445,13 +445,26 @@ def cal_pit_behavior(pit_c_behavior,pit_w_behavior, pitax, cal_ssc):
     
     """
     
-    pitax = pit_c_behavior+pit_w_behavior
+    pitax_before_credits = pit_c_behavior+pit_w_behavior
     
 
         
     #pitax = pitax-min(cal_ssc*percent_deductible,pitax)
   
-     
-    return (pitax)
+    return (pitax_before_credits)
 
+@iterate_jit(nopython=True)
+def pit_after_credits(mortgage_credit_ceiling, pitax_before_credits, mortgage_credits, pitax):
+    """
+    Compute tax liability given the progressive tax rate schedule specified
+    by the (marginal tax) rate* and (upper tax bracket) brk* parameters and
+    given taxable income (taxinc)
+    """
+    allowable_mortgage_credits = min(mortgage_credit_ceiling, mortgage_credits)
+    
+    allowable_mortgage_credits = min(allowable_mortgage_credits, pitax_before_credits)
+    
+    pitax = pitax_before_credits - allowable_mortgage_credits
+    
+    return (pitax)
 

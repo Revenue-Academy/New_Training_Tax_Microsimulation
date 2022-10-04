@@ -224,6 +224,34 @@
         "out_of_range_maxmsg": "",
         "out_of_range_action": "stop"
     },
+    "_mortgage_credit_ceiling": {
+        "long_name": "Ceiling for mortgage cashback",
+        "description": "Ceiling for mortgage cashback",
+        "itr_ref": " ",
+        "notes": "",
+        "row_var": "AYEAR",
+        "row_label": [
+            "2021"
+        ],
+        "start_year": 2021,
+        "cpi_inflatable": true,
+        "cpi_inflated": false,
+        "col_var": "",
+        "col_label": [
+        ],
+        "boolean_value": false,
+        "integer_value": false,
+        "value": [
+                6000000
+        ],
+        "range": {
+            "min": 0,
+            "max": 9e+99
+        },
+        "out_of_range_minmsg": "",
+        "out_of_range_maxmsg": "",
+        "out_of_range_action": "stop"                
+    },
     "_rate1_curr_law": {  
         "long_name": "PIT tax rate 1", 
         "description": "The lowest tax rate, applied to the portion of taxable income below tax bracket 1.",
