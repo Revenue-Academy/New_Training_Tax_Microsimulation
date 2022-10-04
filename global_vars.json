@@ -70,7 +70,7 @@
   "pit_id_var": "id_n",
   "pit_functions_names_filename": "function_names_pit_armenia.json",
   "attribute_vars": [],
-  "pit_adjust_behavior": 1,
+  "pit_adjust_behavior": 0,
   "cit_adjust_behavior": 0,
   "vat_adjust_behavior": 0,
   "pit_distribution_table": 0,

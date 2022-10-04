@@ -1,11 +1,11 @@
 {
   "1": {
-    "selected_item": "mortgage_credit_ceiling",
+    "selected_item": "prop_value_ceiling",
     "selected_year": [
       "2022"
     ],
     "selected_value": [
-      "2000000"
+      "20000000"
     ]
   }
 }
