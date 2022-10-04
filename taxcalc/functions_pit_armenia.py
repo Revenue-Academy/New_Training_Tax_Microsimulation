@@ -454,15 +454,18 @@ def cal_pit_behavior(pit_c_behavior,pit_w_behavior, pitax_before_credits, cal_ss
     return (pitax_before_credits)
 
 @iterate_jit(nopython=True)
-def pit_after_credits(mortgage_credit_ceiling, pitax_before_credits, mortgage_credits, pitax):
+def pit_after_credits(prop_value_ceiling, mortgage_credit_ceiling, pitax_before_credits, prop_value, mortgage_credits, pitax):
     """
     Compute tax liability given the progressive tax rate schedule specified
     by the (marginal tax) rate* and (upper tax bracket) brk* parameters and
     given taxable income (taxinc)
     """
-    allowable_mortgage_credits = min(mortgage_credit_ceiling, mortgage_credits)
     
-    allowable_mortgage_credits = min(allowable_mortgage_credits, pitax_before_credits)
+    if prop_value > prop_value_ceiling:
+        allowable_mortgage_credits = 0
+    else:
+        allowable_mortgage_credits = min(mortgage_credit_ceiling, mortgage_credits)
+        allowable_mortgage_credits = min(allowable_mortgage_credits, pitax_before_credits)
     
     pitax = pitax_before_credits - allowable_mortgage_credits
     

@@ -65,6 +65,15 @@
 			"cross_year": "No",
 			"attribute": "No"
 		},
+		"prop_value": {
+			"type": "float",
+			"desc": "Proporty value ceiling to obtain on mortgage",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
 		"social_fee": {
 			"type": "float",
 			"desc": "Social security contributions",
