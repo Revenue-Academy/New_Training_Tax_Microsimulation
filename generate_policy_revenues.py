@@ -401,19 +401,17 @@ def generate_policy_revenues():
 
         df_tax12[tax_type]['All']['weight'] = df_tax12[tax_type]['All']['weight'+'_'+str(start_year)]
         df_tax12[tax_type]['All']['pre_tax_income'] = df_tax12[tax_type]['All'][income_measure[tax_type]+'_'+str(start_year)]        
-        df_tax12[tax_type]['All']['after_tax_income'] = (df_tax12[tax_type]['All'][income_measure[tax_type]+'_'+str(start_year)]-
-                                                         df_tax12[tax_type]['All'][tax_collection_var+'_'+str(start_year)])
-        df_tax12[tax_type]['All']['after_tax_income_ref'] = (df_tax12[tax_type]['All'][income_measure[tax_type]+'_ref_'+str(start_year)]-
-                                                         df_tax12[tax_type]['All'][tax_collection_var+'_ref_'+str(start_year)])      
+        df_tax12[tax_type]['All']['pitax_curr_law'] = df_tax12[tax_type]['All'][tax_collection_var+'_'+str(start_year)]
+        df_tax12[tax_type]['All']['pitax_ref'] = df_tax12[tax_type]['All'][tax_collection_var+'_ref_'+str(start_year)]      
         gini = pd.DataFrame()
         gini['weight'] = df_tax12[tax_type]['All']['weight']
         gini['pre_tax_income'] = df_tax12[tax_type]['All']['pre_tax_income']
-        gini['after_tax_income'] = df_tax12[tax_type]['All']['after_tax_income']
-        gini['after_tax_income_ref'] = df_tax12[tax_type]['All']['after_tax_income_ref']
+        gini['pitax_curr_law'] = df_tax12[tax_type]['All']['pitax_curr_law']
+        gini['pitax_ref'] = df_tax12[tax_type]['All']['pitax_ref']
         
         #gini.to_csv('df_for_gini.csv', index=False)
         #print('df ', df)
-        varlist = ['pre_tax_income', 'after_tax_income', 'after_tax_income_ref']
+        varlist = ['pre_tax_income', 'pitax_curr_law', 'pitax_ref']
         kakwani_list = []
         gini= gini.sort_values(by='pre_tax_income')
         #gini['weight'] = 100
