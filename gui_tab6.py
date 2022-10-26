@@ -239,10 +239,13 @@ def display_chart(self, event, global_vars):
         df = df[:-1]
         df['ETR'] = np.where(df['ETR']>1, np.nan, df['ETR'])
         df['ETR_ref'] = np.where(df['ETR_ref']>1, np.nan, df['ETR_ref'])
-        maxy = max(df['ETR'].max(), df['ETR_ref'].max())         
+        maxy = max(df['ETR'].max(), df['ETR_ref'].max())  
+        miny = min(df['ETR'].min(), df['ETR_ref'].min()) 
+        d = (maxy - miny)/10
         df = df.reset_index()
         fig, ax = plt.subplots(figsize=(10, 8))
         ax=df.plot(kind="line", x='index', y=['ETR', 'ETR_ref'], color=["r", "b"], label=["ETR "+str(start_year), "ETR Under Reform "+str(start_year)]) 
+        ax.set_ylim([miny - d, maxy + d])
         #col = ['r', 'b', 'y', 'c', 'm', 'k', 'g', 'r', 'b', 'y']
         #ax.set_xlabel('Percentile')
         ax.set_xticks(np.arange(0, 101, 10))
@@ -252,12 +255,13 @@ def display_chart(self, event, global_vars):
         kakwani_text0 = str(start_year)+' Pre Tax Gini                        : '+ str(round(kakwani_list[0],3))
         kakwani_text1 = str(start_year)+' Kakwani Index (Current Law): '+ str(round(kakwani_list[1],3))
         kakwani_text2 = str(start_year)+' Kakwani Index (Reform)       : '+ str(round(kakwani_list[2],3))
-        #ax.text(5, 5.5*(maxy/10), kakwani_text0, fontsize = 8)
-        #ax.text(5, 5*(maxy/10), kakwani_text1, fontsize = 8)
-        #ax.text(5, 4.5*(maxy/10), kakwani_text2, fontsize = 8)
-        ax.text(7, 9*(maxy/10), kakwani_text0, fontsize = 8)
-        ax.text(7, 8.5*(maxy/10), kakwani_text1, fontsize = 8)
-        ax.text(7, 8*(maxy/10), kakwani_text2, fontsize = 8)
+        ax.text(5, miny+5.5*d, kakwani_text0, fontsize = 8)
+        ax.text(5, miny+5*d, kakwani_text1, fontsize = 8)
+        ax.text(5, miny+4.5*d, kakwani_text2, fontsize = 8)
+        # ax.text(7, 9*(maxy/10), kakwani_text0, fontsize = 8)
+        # ax.text(7, 8.5*(maxy/10), kakwani_text1, fontsize = 8)
+        # ax.text(7, 8*(maxy/10), kakwani_text2, fontsize = 8)
+        
         pic_filename1 = "etr.png"
         plt.savefig(pic_filename1)
         self.image = ImageTk.PhotoImage(Image.open("etr.png"))

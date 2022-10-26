@@ -66,7 +66,7 @@ def initialize_vars(self):
     self.vars['pit_functions_filename'] = "functions_pit_armenia.py"
     self.vars['pit_function_names_filename'] = "function_names_pit_armenia.json"
     self.vars['pit_distribution_json_filename'] = 'pit_distribution_armenia.json'  
-    self.vars['gdp_filename'] = 'gdp_nominal_training.csv'
+    self.vars['gdp_filename'] = 'gdp_nominal_armenia.csv'
     
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_training.json"    
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_training.csv"
