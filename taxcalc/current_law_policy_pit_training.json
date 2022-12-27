@@ -45,7 +45,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-           1000000
+           1080000
         ],
         "range": {
             "min": 0,
@@ -72,7 +72,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-            0.15
+            0.18
         ],
         "range": {
             "min": 0,
@@ -128,7 +128,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-            0.10
+            0.18
         ],
         "range": {
             "min": 0,
@@ -185,7 +185,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-            0.10
+            0.18
         ],
         "range": {
             "min": 0,

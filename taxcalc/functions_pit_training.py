@@ -54,6 +54,8 @@ def cal_ssc_w(ssc_w, income_wage_l, ssc_rate, min_base_wage, max_base_wage, min_
         ssc_w_calc = ssc_rate * income_wage_l
     elif (income_wage_l > max_base_wage):
         ssc_w_calc = max_ssc
+    # ssc_w_calc = min(max(income_wage_l, min_base_wage), max_base_wage)*ssc_rate     This single line of code eliminates above lines and also need to have a separate function for cap
+                                                                                        #To remove cap max_base_wage needs to be set at a very high level like 1e+99
     return ssc_w_calc
 
 "Calculation for Social Security Contribution (SSC) without cap"  

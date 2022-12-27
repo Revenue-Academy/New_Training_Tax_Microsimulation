@@ -41,7 +41,6 @@ def initialize_vars(self):
         
      
     ##### NOTE 'Year' is a key word for year in records variable
-    '''
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_pit_training.json"
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_pit_training.csv"
     self.vars['pit_data_filename'] = "pit_data_training.csv"
@@ -53,8 +52,8 @@ def initialize_vars(self):
     self.vars['pit_function_names_filename'] = "function_names_pit_training.json"
     self.vars['pit_distribution_json_filename'] = 'pit_distribution_training.json'  
     self.vars['gdp_filename'] = 'gdp_nominal_training.csv'
-    '''
     
+    '''
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_pit_armenia.json"
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_pit_armenia.csv"
     self.vars['pit_data_filename'] = "pit_armenia.csv"
@@ -66,7 +65,7 @@ def initialize_vars(self):
     self.vars['pit_function_names_filename'] = "function_names_pit_armenia.json"
     self.vars['pit_distribution_json_filename'] = 'pit_distribution_armenia.json'  
     self.vars['gdp_filename'] = 'gdp_nominal_training.csv'
-    
+    '''
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_training.json"    
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_training.csv"
     self.vars['cit_data_filename'] = "cit_data_training.csv"
@@ -227,8 +226,8 @@ def display_entry(self, widget, tax_type):
         self.entry_end_year[tax_type].destroy()
     else:
         if tax_type == 'pit':
-            self.vars['DEFAULTS_FILENAME'] = "current_law_policy_pit_armenia.json"
-            self.vars['GROWFACTORS_FILENAME'] = "growfactors_pit_armenia.csv"
+            self.vars['DEFAULTS_FILENAME'] = "current_law_policy_pit_training.json"
+            self.vars['GROWFACTORS_FILENAME'] = "growfactors_pit_training.csv"
             self.vars['start_year'] = 2022
             self.vars['data_start_year'] = 2021
             self.vars['SALARY_VARIABLE'] = "SALARY"
