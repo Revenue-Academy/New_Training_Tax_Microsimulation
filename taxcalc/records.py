@@ -265,6 +265,8 @@ class Records(object):
         #print("grow factors columns used ", gf_columns)
         #print("var pre: ", getattr(self, 'SALARY'))        
         for col in gf_columns:
+            if col == 'mortgage_credits':
+                setattr(self, col, getattr(self, col+'_'+str(year)))
             GF_COLS = self.gfactors.factor_value(col, year)
             var = getattr(self, col)
             var *= GF_COLS
@@ -347,6 +349,7 @@ class Records(object):
         READ_VARS = set()
         self.IGNORED_VARS = set()
         for varname in list(taxdf.columns.values):
+            #print(varname)
             if varname in Records.USABLE_READ_VARS:
                 READ_VARS.add(varname)
                 if varname in Records.INTEGER_READ_VARS:
@@ -355,9 +358,10 @@ class Records(object):
                 else:
                     setattr(self, varname,
                             taxdf[varname].astype(np.float64).values)
-                    #print(self.SALARY)
+                    
             else:
                 self.IGNORED_VARS.add(varname)
+        #print(self.mortgage_credits1.sum())
         # check that MUST_READ_VARS are all present in taxdf
         if not Records.MUST_READ_VARS.issubset(READ_VARS):
             #print('MUST_READ_VARS ', Records.MUST_READ_VARS)

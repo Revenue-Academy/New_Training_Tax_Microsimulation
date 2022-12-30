@@ -188,7 +188,8 @@ def generate_policy_revenues():
  
     f = open('reform.json')
     block_selected_dict = json.load(f)
-    print("block_selected_dict from json",block_selected_dict)
+    if verbose:
+        print("block_selected_dict from json",block_selected_dict)
     
     # create Policy object containing current-law policy
     pol = Policy(DEFAULTS_FILENAME=global_variables['DEFAULTS_FILENAME'])
@@ -401,53 +402,70 @@ def generate_policy_revenues():
 
         df_tax12[tax_type]['All']['weight'] = df_tax12[tax_type]['All']['weight'+'_'+str(start_year)]
         df_tax12[tax_type]['All']['pre_tax_income'] = df_tax12[tax_type]['All'][income_measure[tax_type]+'_'+str(start_year)]        
-        df_tax12[tax_type]['All']['pitax_curr_law'] = df_tax12[tax_type]['All'][tax_collection_var+'_'+str(start_year)]
-        df_tax12[tax_type]['All']['pitax_ref'] = df_tax12[tax_type]['All'][tax_collection_var+'_ref_'+str(start_year)]      
+        df_tax12[tax_type]['All']['pitax_current_law'] = df_tax12[tax_type]['All'][tax_collection_var+'_'+str(start_year)]
+        df_tax12[tax_type]['All']['pitax_reform'] = df_tax12[tax_type]['All'][tax_collection_var+'_ref_'+str(start_year)]   
         gini = pd.DataFrame()
         gini['weight'] = df_tax12[tax_type]['All']['weight']
         gini['pre_tax_income'] = df_tax12[tax_type]['All']['pre_tax_income']
-        gini['pitax_curr_law'] = df_tax12[tax_type]['All']['pitax_curr_law']
-        gini['pitax_ref'] = df_tax12[tax_type]['All']['pitax_ref']
+        gini['pitax_current_law'] = df_tax12[tax_type]['All']['pitax_current_law']
+        gini['pitax_reform'] = df_tax12[tax_type]['All']['pitax_reform']
         
         #gini.to_csv('df_for_gini.csv', index=False)
         #print('df ', df)
-        varlist = ['pre_tax_income', 'pitax_curr_law', 'pitax_ref']
+        varlist = ['pre_tax_income', 'pitax_current_law', 'pitax_reform']
         kakwani_list = []
         gini= gini.sort_values(by='pre_tax_income')
         #gini['weight'] = 100
         gini['cumulative_weight']=np.cumsum(gini['weight'])
         sum_weight = (gini['weight']).sum()
+        # This is the cumulative population plotted on the X Axis
         gini['percentage_cumul_pop'] = gini['cumulative_weight']/sum_weight
         gini['total_income'] = gini['weight']*gini['pre_tax_income']
+        # This is the cumulative income plotted on the Y Axis
         gini['cumulative_total_income']= np.cumsum(gini['total_income'])
         sum_total_income = sum(gini['total_income'])
         gini['percentage_cumul_income'] = gini['cumulative_total_income']/sum_total_income
+        # This is the gap between the 45 degree line and the Lorenz curve
+        # We are trying to calculate "A"
+        # 45 degree line means that the "Y Value" is the same as the
+        # the "X Value" i.e. gini['percentage_cumul_pop']
         gini['height'] = gini['percentage_cumul_pop']-gini['percentage_cumul_income']
+        # We insert a zero row in the beginning inorder to have a reading 
+        # for the origin (0,0) of the Lorenz curve 
         gini1 = pd.DataFrame([[np.nan]*len(gini.columns)], columns=gini.columns)
         #gini = gini1.append(gini, ignore_index=True)
-        gini = pd.concat([gini1, gini], ignore_index=True)
-        
+        gini = pd.concat([gini1, gini], axis=0)      
+        # taking care of the NANs including filling 0 in the first row
         gini['percentage_cumul_pop']= gini['percentage_cumul_pop'].fillna(0)
         gini['percentage_cumul_income']= gini['percentage_cumul_income'].fillna(0)
         gini['height']= gini['height'].fillna(0)
         gini['base'] = gini.percentage_cumul_pop.diff()
         gini['base']= gini['base'].fillna(0)
+        # Calculate the area of the trapezoid
         gini['integrate_area']= 0.5*gini['base']*(gini['height']+gini['height'].shift())
         sum_integrate_area = gini['integrate_area'].sum()
+        # The Gini is 2xA where A is the area between the 45 degree
+        # line and the Lorenz Curve
         gini_index0 = 2*(sum_integrate_area)
         kakwani_list = kakwani_list + [gini_index0]
         
-        i=0
+        # Repeat the process to calculate the Concentration Coefficient
+        # for the remaining variables. We retain the same order
+        # as that when we calculated the Gini for Income
+        # so we do not sort the values
+        
         for var in varlist[1:]:
+            # We drop the zero row we created earlier
             gini = gini[1:]
+            # We use the same columns "total_income"
+            # This could be renamed as "Y var" to be more general
             gini['total_income'] = gini['weight']*gini[var]
             gini['cumulative_total_income']= np.cumsum(gini['total_income'])
             sum_total_income = sum(gini['total_income'])
             gini['percentage_cumul_income'] = gini['cumulative_total_income']/sum_total_income
             gini['height'] = gini['percentage_cumul_pop']-gini['percentage_cumul_income']            
             gini1 = pd.DataFrame([[np.nan]*len(gini.columns)], columns=gini.columns)
-            #gini = gini1.append(gini, ignore_index=True)
-            gini = pd.concat([gini1, gini], ignore_index=True)
+            gini = pd.concat([gini1, gini], axis=0)
             gini['percentage_cumul_pop']= gini['percentage_cumul_pop'].fillna(0)
             gini['percentage_cumul_income']= gini['percentage_cumul_income'].fillna(0)
             gini['height']= gini['height'].fillna(0)
@@ -457,7 +475,6 @@ def generate_policy_revenues():
             sum_integrate_area = gini['integrate_area'].sum()
             gini_index = 2*(sum_integrate_area)
             kakwani_list = kakwani_list + [gini_index-gini_index0]
-            i=1+1            
         return kakwani_list
      
     def merge_distribution_table_dicts(dt1, dt2, tax_type, data_start_year, end_year):

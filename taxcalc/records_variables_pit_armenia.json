@@ -65,6 +65,60 @@
 			"cross_year": "No",
 			"attribute": "No"
 		},
+		"mortgage_credits_2022": {
+			"type": "float",
+			"desc": "Cashback of mortgage",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"mortgage_credits_2023": {
+			"type": "float",
+			"desc": "Cashback of mortgage",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"mortgage_credits_2024": {
+			"type": "float",
+			"desc": "Cashback of mortgage",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"mortgage_credits_2025": {
+			"type": "float",
+			"desc": "Cashback of mortgage",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"mortgage_credits_2026": {
+			"type": "float",
+			"desc": "Cashback of mortgage",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},
+		"mortgage_credits_2027": {
+			"type": "float",
+			"desc": "Cashback of mortgage",
+			"form": {
+				"2021": "pit_armenia"
+			},
+			"cross_year": "No",
+			"attribute": "No"
+		},		
 		"prop_value": {
 			"type": "float",
 			"desc": "Proporty value ceiling to obtain on mortgage",
