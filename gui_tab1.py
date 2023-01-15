@@ -57,8 +57,8 @@ def initialize_vars(self):
     
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_pit_armenia.json"
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_pit_armenia.csv"
-    self.vars['pit_data_filename'] = "pit_armenia_new_sample_2021.csv"
-    self.vars['pit_weights_filename'] = "pit_weights_armenia.csv"
+    self.vars['pit_data_filename'] = "pit_armenia_full_mortgage_updated.csv"
+    self.vars['pit_weights_filename'] = "pit_weights_armenia_mortgage_updated.csv"
     self.vars['pit_records_variables_filename'] = "records_variables_pit_armenia.json"
     self.vars['pit_benchmark_filename'] = "tax_incentives_benchmark_pit_training.json"
     #self.vars['pit_elasticity_filename'] = "elasticity_pit_training.json"
