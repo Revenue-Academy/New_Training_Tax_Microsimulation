@@ -541,6 +541,14 @@ class Calculator(object):
             else:
                 msg = 'tax type record ="{}" is not initialized'
                 raise ValueError(msg.format(tax_type))
+        elif tax_type == 'sst':
+            if self.records is not None:
+                tax_data = self.array(variable_name)
+                attribute_var = self.ATTRIBUTE_READ_VARS_PIT                              
+                (attribute_types, attribute_data)  = self.get_attribute_types('pit', 0)             
+            else:
+                msg = 'tax type record ="{}" is not initialized'
+                raise ValueError(msg.format(tax_type))        
         elif tax_type == 'cit':
             if self.corprecords is not None:            
                 tax_data = self.carray(variable_name)
@@ -565,6 +573,9 @@ class Calculator(object):
         if tax_type == 'pit':
             wtd_total_tax = {}
             wtd_total_tax['All'] = (tax_data * self.array('weight')).sum()
+        elif tax_type == 'sst':
+            wtd_total_tax = {}
+            wtd_total_tax['All'] = (tax_data * self.array('weight')).sum()        
         elif tax_type == 'cit':
             wtd_total_tax = {}
             wtd_total_tax['All'] = (tax_data * self.carray('weight')).sum()

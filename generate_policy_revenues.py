@@ -143,7 +143,7 @@ def generate_policy_revenues():
     id_varlist = []
     # start the simulation for pit/cit/vat    
     if global_variables['pit']:
-        tax_list = tax_list + ['pit']
+        tax_list = tax_list + ['pit', 'sst']
         tax_collection_var_list = tax_collection_var_list + ['pitax']
         id_varlist = id_varlist + [global_variables['pit_id_var']]        
         recs = Records(data=global_variables['pit_data_filename'], weights=global_variables['pit_weights_filename'], gfactors=GrowFactors(growfactors_filename=global_variables['GROWFACTORS_FILENAME']))
@@ -246,7 +246,11 @@ def generate_policy_revenues():
     dt = {}
     dt_percentile = {}
     df_tax1 = {}
-    df_tax2 = {}    
+    df_tax2 = {}
+    title_header = {}
+    shift_x = 600
+    shift_y = 140    
+    shift = 500
     for tax_type in tax_list:
         revenue_dict[tax_type]={}
         dt1[tax_type] = {}
@@ -263,18 +267,21 @@ def generate_policy_revenues():
             revenue_dict[tax_type][year]={}
         if global_variables[tax_type+'_display_revenue_table']:
             window_dict[tax_type] = tk.Toplevel()
-            window_dict[tax_type].geometry("800x600+600+140")            
+            #window_dict[tax_type].geometry("800x600+600+140")
+            window_dict[tax_type].geometry("600x600+"+str(shift_x)+"+"+str(shift_y))       
+            shift_x = shift_x + shift
+            shift_y = shift_y            
             #display_table(window, header=True)
             # Adjust this for number of years selected
             header = ["header","Year", "Current Law", "Reform", "Diff"]
             if global_variables[tax_type+'_adjust_behavior']:
                 header = header + ['Reform (Behavior)', "Diff"]
-            title_header = [["title", tax_type.upper()+" Projections (billions)"],
+            title_header[tax_type] = [["title", tax_type.upper()+" Projections (billions)"],
                             header]
             if percent_gdp:
-                title_header = [["title", tax_type.upper()+" Projections (% of GDP)"],
+                title_header[tax_type] = [["title", tax_type.upper()+" Projections (% of GDP)"],
                             header]
-            row_num[tax_type] = display_table(window_dict[tax_type], data=title_header, header=True)
+            row_num[tax_type] = display_table(window_dict[tax_type], data=title_header[tax_type], header=True)
     
     for year in range(data_start_year, end_year+1):       
         calc1.advance_to_year(year)
