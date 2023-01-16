@@ -177,6 +177,7 @@ def generate_policy_revenues():
     distribution_vardict_dict = {}
     income_measure = {}
     for tax_type in tax_list:
+        #print(tax_type)
         if global_variables[tax_type+'_distribution_table']:
             #CIT_VAR_INFO_FILENAME = 'taxcalc/'+vars['cit_records_variables_filename']
             #self.max_lag_years = vars['cit_max_lag_years']
@@ -185,7 +186,7 @@ def generate_policy_revenues():
             distribution_vardict_dict[tax_type] = json.load(f)
             #print('distribution_vardict_dict[tax_type] ', distribution_vardict_dict[tax_type])
             income_measure[tax_type] = distribution_vardict_dict[tax_type]['income_measure']
- 
+            #print(income_measure[tax_type])
     f = open('reform.json')
     block_selected_dict = json.load(f)
     if verbose:
@@ -251,6 +252,7 @@ def generate_policy_revenues():
     shift_x = 600
     shift_y = 140    
     shift = 500
+    #print('tax_list ',tax_list)
     for tax_type in tax_list:
         revenue_dict[tax_type]={}
         dt1[tax_type] = {}
@@ -262,9 +264,12 @@ def generate_policy_revenues():
         dt[tax_type] = {}
         dt_percentile[tax_type] = {}
         df_tax1[tax_type] = {}
-        df_tax2[tax_type] = {}  
+        df_tax2[tax_type] = {}
         for year in range(data_start_year, end_year+1):
             revenue_dict[tax_type][year]={}
+        #print(tax_type)
+        #print(tax_type+'_display_revenue_table')
+        #print(global_variables[tax_type+'_display_revenue_table'])
         if global_variables[tax_type+'_display_revenue_table']:
             window_dict[tax_type] = tk.Toplevel()
             #window_dict[tax_type].geometry("800x600+600+140")
@@ -282,7 +287,7 @@ def generate_policy_revenues():
                 title_header[tax_type] = [["title", tax_type.upper()+" Projections (% of GDP)"],
                             header]
             row_num[tax_type] = display_table(window_dict[tax_type], data=title_header[tax_type], header=True)
-    
+    tax_type = tax_list[0]
     for year in range(data_start_year, end_year+1):       
         calc1.advance_to_year(year)
         calc2.advance_to_year(year)
@@ -343,10 +348,12 @@ def generate_policy_revenues():
         if global_variables[tax_type+'_display_revenue_table']:
             for tax_type in tax_list:
                 if year>=start_year:
+                    #print(tax_type)
                     row_num[tax_type] = display_table(window_dict[tax_type], 
                                                       data = data_row[tax_type], 
                                                       row = row_num[tax_type])
         #display_table(window, revenue_dict_pit=revenue_dict_pit, year=year, row=i)
+        
         i=i+1
         dt1[tax_type][year]={}
         dt2[tax_type][year]={}
@@ -356,8 +363,9 @@ def generate_policy_revenues():
         dt2_percentile[tax_type][year]={}      
         df_tax1[tax_type][year] = {}
         df_tax2[tax_type][year] = {}
+        #print(tax_type+'_distribution_table')
         if global_variables[tax_type+'_distribution_table']:
-            
+            #print(tax_type+'_distribution_table')
             if not global_variables[tax_type+'_display_distribution_table_by_attribute']:
                 dist_table_attribute_var=None
             else:
@@ -487,6 +495,8 @@ def generate_policy_revenues():
     def merge_distribution_table_dicts(dt1, dt2, tax_type, data_start_year, end_year):
         #print('dt1 ',dt1)
         #print('dt1[tax_type][start_year] ', dt1[tax_type][start_year])
+        #print(dt1[tax_type][data_start_year].keys())
+        #print(tax_type)
         attribute_types = dt1[tax_type][data_start_year].keys()
         dt = {}
         for year in range(data_start_year, end_year+1):
@@ -508,9 +518,11 @@ def generate_policy_revenues():
     #save the results of each tax type in separate files
     df = {}
     # save the results into a csv file
-    for tax_type in tax_list:
+    for tax_type in [tax_list[0]]:
         #filename1 = 'Revenue Data_'+'_'+tax_type+'_'+date_time
+        
         filename_chart_rev_projection = tax_type+'_revenue_projection'
+        #print(filename_chart_rev_projection)
         revenue_dict_df = {}
         for k, v in revenue_dict[tax_type].items():
             revenue_dict_df[k] = {}
@@ -547,8 +559,9 @@ def generate_policy_revenues():
         df_tax12={}
         dt12={}
         dt34={}
-        for tax_type in tax_list:
-
+        #print(tax_list)
+        tax_type = tax_list[0]
+        for tax_type in [tax_list[0]]:
             df_tax12[tax_type] = merge_distribution_table_dicts(df_tax1, df_tax2, tax_type, data_start_year, end_year)
             dt12[tax_type] = merge_distribution_table_dicts(dt1, dt2, tax_type, data_start_year, end_year)
             dt34[tax_type] = merge_distribution_table_dicts(dt3, dt4, tax_type, data_start_year, end_year)
@@ -631,10 +644,13 @@ def generate_policy_revenues():
                 row_num[tax_type] = display_table(window_dist[tax_type], row = row_num[tax_type], dataframe=dt_tax_all12)
                 l = tk.Button(window_dist[tax_type],text="Save Results",command=lambda: write_file(dt_tax_all12, text_output2, filename2, window_dist[tax_type], row_num[tax_type]))
                 l.grid(row=row_num[tax_type]+2, column=2, pady = 10, sticky=tk.W)
-        return kakwani_list        
+        return kakwani_list
+    tax_type = tax_list[0]
+    #print(tax_type)
+    #print(global_variables[tax_type+'_distribution_table'])
     if global_variables[tax_type+'_distribution_table']:
         kakwani_list = display_distribution_table_window(tax_type)
-        for tax_type in tax_list:
+        for tax_type in [tax_list[0]]:
             global_variables[tax_type +'_display_revenue_table'] = 1
             chart_list = chart_list + [tax_type+'_distribution_table']
             chart_list = chart_list + [tax_type+'_distribution_table_top1']

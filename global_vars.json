@@ -28,15 +28,22 @@
   "vat_function_names_filename": "vat_function_names.json",
   "vat_distribution_json_filename": "vat_distribution.json",
   "pit_display_distribution_table_byincome": 0,
-  "pit_display_distribution_table_bydecile": 0,
+  "pit_display_distribution_table_bydecile": 1,
   "pit_display_revenue_table": 1,
+  "sst_display_distribution_table_byincome": 0,
+  "sst_display_distribution_table_bydecile": 0,
+  "sst_display_revenue_table": 0,
   "cit_display_distribution_table_byincome": 0,
   "cit_display_distribution_table_bydecile": 0,
   "cit_display_revenue_table": 1,
   "vat_display_distribution_table_byincome": 0,
   "vat_display_distribution_table_bydecile": 0,
   "vat_display_revenue_table": 1,
-  "kakwani_list": [],
+  "kakwani_list": [
+    0.5904823213371635,
+    -0.031211658420080335,
+    -0.008800328381574074
+  ],
   "start_year": "2022",
   "end_year": "2027",
   "pit_data_start_year": 2021,
@@ -59,7 +66,10 @@
   "charts_ready": 1,
   "chart_list": [
     "pit_revenue_projection",
-    "sst_revenue_projection"
+    "pit_distribution_table",
+    "pit_distribution_table_top1",
+    "pit_distribution_table_income_bins",
+    "pit_etr"
   ],
   "show_error_log": 0,
   "verbose": 0,
@@ -70,11 +80,11 @@
   "pit_id_var": "id_n",
   "pit_functions_names_filename": "function_names_pit_armenia.json",
   "attribute_vars": [],
+  "pit_distribution_table": 1,
   "pit_adjust_behavior": 0,
   "cit_adjust_behavior": 0,
   "vat_adjust_behavior": 0,
   "sst_adjust_behavior": 0,
-  "pit_distribution_table": 0,
   "pit_display_distribution_table": 0,
   "pit_display_distribution_table_by_attribute": 0,
   "cit_distribution_table": 0,
@@ -85,6 +95,5 @@
   "vat_display_distribution_table_by_attribute": 0,
   "sst_distribution_table": 0,
   "sst_display_distribution_table": 0,
-  "sst_display_distribution_table_by_attribute": 0,
-  "sst_display_revenue_table": 1
+  "sst_display_distribution_table_by_attribute": 0
 }
