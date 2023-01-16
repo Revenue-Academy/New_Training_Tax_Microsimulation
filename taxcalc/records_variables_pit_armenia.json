@@ -251,7 +251,7 @@
 				"2021": "pit_armenia"
 			}
 		},
-		"cal_ssc": {
+		"sstax": {
 			"type": "float",
 			"desc": "Calculated Social Security Contributions ",
 			"form": {

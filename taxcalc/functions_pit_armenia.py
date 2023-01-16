@@ -31,14 +31,19 @@ def cal_base_social(salary, civil_contract, base_social):
 
 "Calculation of Social payments"
 @iterate_jit(nopython=True)
-def cal_ssc_fun(social_fee, base_social, min_income_for_ssc,max_annual_income_low_ssc,max_annual_income_ssc,rate_sp_1,rate_sp_2, cal_ssc):    
+def cal_ssc_fun(social_fee, base_social, min_income_for_ssc,max_annual_income_low_ssc,max_annual_income_ssc,rate_sp_1,rate_sp_2, sstax):    
     """ Note:  
             Hint: Please note, that the social security scheme is mandatory for all the taxpayers born after 1974, and it is voluntary for others born before 1974.
             
              1.Base for social payment :
               
-              The base for calculation of the social payment is the basic income, which is salary and other payments equal thereto which are subject to taxation by income tax.
-              The Employer, as a tax agent, is obliged to withhold the amount of social payment as well as submit monthly personalized reports to the tax authorities on calculated income, amounts of tax and social payments withheld from individuals within the terms established by the RA Tax Code.
+              The base for calculation of the social payment is the basic income, 
+              which is salary and other payments equal thereto which are subject 
+              to taxation by income tax.
+              The Employer, as a tax agent, is obliged to withhold the amount of 
+              social payment as well as submit monthly personalized reports to the 
+              tax authorities on calculated income, amounts of tax and social payments withheld from individuals within the terms established by the RA Tax Code.
+              
               The social payment rates are as follows:
                   
                      Basic monthly Income*             Social payment
@@ -51,39 +56,51 @@ def cal_ssc_fun(social_fee, base_social, min_income_for_ssc,max_annual_income_lo
              2023  Up to AMD 500,000                     5 %
                    More than AMD 500,000                10 % on income above 500000            
                      
-              Starting 01.07.2020 the maximum monthly threshold of the calculation basis for social payment is AMD 1,020,000. This means that the maximum amount of the Social Payment in 2021 will be capped at AMD.69,500. (Source https://home.kpmg/xx/en/home/insights/2021/07/armenia-thinking-beyond-borders.html)
+              Starting 01.07.2020 the maximum monthly threshold of the calculation 
+              basis for social payment is AMD 1,020,000. This means that the maximum 
+              amount of the Social Payment in 2021 will be capped at AMD.69,500. 
+              (Source https://home.kpmg/xx/en/home/insights/2021/07/armenia-thinking-beyond-borders.html)
                 
               
               2.Rule for calculation Social security contributions for 2021 :
                
-              Individuals born after 1 January 1974 must make social security payments at a rate of 3.5 % on their salary and equivalent income and income from the provision of services, in a case where the income is less than or equal to AMD 500,000. 
-              If the salary and equivalent income or income from the provision of services is between AMD 500,000 and AMD 1,020,000 (the latter amount is calculated as 15 times the minimum monthly salary (AMD 68,000)), 
-              the social security contribution is calculated as 10% on the gross income minus AMD 32,500. Where the relevant income is equal to or exceeds AMD 1,020,000, the social security contribution is calculated 
-              as 10% on AMD 1,020,000 minus AMD 32,500. Individuals have the right to waive the maximum threshold for social security payments.(Source:https://www2.deloitte.com/content/dam/Deloitte/global/Documents/Tax/dttl-tax-armeniahighlights-2021.pdf)
+              Individuals born after 1 January 1974 must make social security payments 
+              at a rate of 3.5 % on their salary and equivalent income and income 
+              from the provision of services, in a case where the income is less 
+              than or equal to AMD 500,000. 
+              If the salary and equivalent income or income from the provision of 
+              services is between AMD 500,000 and AMD 1,020,000 (the latter amount 
+              is calculated as 15 times the minimum monthly salary (AMD 68,000)), 
+              the social security contribution is calculated as 10% on the gross 
+              income minus AMD 32,500. Where the relevant income is equal to or 
+              exceeds AMD 1,020,000, the social security contribution is calculated 
+              as 10% on AMD 1,020,000 minus AMD 32,500. Individuals have the right 
+              to waive the maximum threshold for social security payments.
+              (Source:https://www2.deloitte.com/content/dam/Deloitte/global/Documents/Tax/dttl-tax-armeniahighlights-2021.pdf)
     
     """
     
     if social_fee ==0 and base_social> 1:
-        cal_ssc = 0
+        sstax = 0
     elif base_social <= min_income_for_ssc:
-        cal_ssc = 0.
+        sstax = 0.
     elif (base_social >=min_income_for_ssc) and (base_social <= max_annual_income_low_ssc):
-       cal_ssc = base_social * rate_sp_1  #policy is to pay ssc on entire base if it exceeds threshold
+       sstax = base_social * rate_sp_1  #policy is to pay ssc on entire base if it exceeds threshold
     #elif (base_social >=min_income_for_ssc) and (base_social <= max_annual_income_low_ssc):
-        #cal_ssc = (base_social - min_income_for_ssc)  * rate_sp_1  #policy is to pay ssc on portion above min threshold 
+        #sstax = (base_social - min_income_for_ssc)  * rate_sp_1  #policy is to pay ssc on portion above min threshold 
     elif (base_social >=max_annual_income_low_ssc) and (base_social <=max_annual_income_ssc): 
-       cal_ssc =  (max_annual_income_low_ssc * rate_sp_1) +  max(0., (base_social - max_annual_income_low_ssc)*rate_sp_2)
+       sstax =  (max_annual_income_low_ssc * rate_sp_1) +  max(0., (base_social - max_annual_income_low_ssc)*rate_sp_2)
     elif base_social > max_annual_income_ssc:
-       cal_ssc = (max_annual_income_low_ssc * rate_sp_1) +  max(0., (max_annual_income_ssc - max_annual_income_low_ssc)*rate_sp_2)
-    return  (cal_ssc)
+       sstax = (max_annual_income_low_ssc * rate_sp_1) +  max(0., (max_annual_income_ssc - max_annual_income_low_ssc)*rate_sp_2)
+    return  (sstax)
 
 
 
 "Calculation for tax base for income from wages"
 @iterate_jit(nopython=True)
-def cal_tti_wage(percent_ssc_deductible, cal_ssc, salary, civil_contract,other_income,deduction,tti_wages):
+def cal_tti_wage(percent_ssc_deductible, sstax, salary, civil_contract,other_income,deduction,tti_wages):
     tti_wages=(salary + civil_contract + other_income) - deduction
-    allowed_ssc = cal_ssc*percent_ssc_deductible
+    allowed_ssc = sstax*percent_ssc_deductible
     if tti_wages>=allowed_ssc:
         tti_wages = tti_wages-allowed_ssc
     else:
@@ -417,7 +434,7 @@ def cal_pit_w_behavior(tti_wages_behavior, rate1, rate2, rate3, rate4, tbrk1, tb
 
 
 @iterate_jit(nopython=True)
-def cal_pit_behavior(pit_c_behavior,pit_w_behavior, pitax_before_credits, cal_ssc):
+def cal_pit_behavior(pit_c_behavior,pit_w_behavior, pitax_before_credits, sstax):
     """
     Explanation about total PIT calculation
     
@@ -449,7 +466,7 @@ def cal_pit_behavior(pit_c_behavior,pit_w_behavior, pitax_before_credits, cal_ss
     
 
         
-    #pitax = pitax-min(cal_ssc*percent_deductible,pitax)
+    #pitax = pitax-min(sstax*percent_deductible,pitax)
   
     return (pitax_before_credits)
 

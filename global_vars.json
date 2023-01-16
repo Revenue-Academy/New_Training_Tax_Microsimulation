@@ -1,7 +1,7 @@
 {
   "DEFAULTS_FILENAME": "current_law_policy_pit_armenia.json",
   "GROWFACTORS_FILENAME": "growfactors_pit_armenia.csv",
-  "pit_data_filename": "pit_armenia_full_mortgage_updated.csv",
+  "pit_data_filename": "pit_armenia_full_mortgage_updated1.csv",
   "pit_weights_filename": "pit_weights_armenia_mortgage_updated.csv",
   "pit_records_variables_filename": "records_variables_pit_armenia.json",
   "pit_benchmark_filename": "tax_incentives_benchmark_pit_training.json",
@@ -58,7 +58,8 @@
   "vat_id_var": "id_n",
   "charts_ready": 1,
   "chart_list": [
-    "pit_revenue_projection"
+    "pit_revenue_projection",
+    "sst_revenue_projection"
   ],
   "show_error_log": 0,
   "verbose": 0,
@@ -72,6 +73,7 @@
   "pit_adjust_behavior": 0,
   "cit_adjust_behavior": 0,
   "vat_adjust_behavior": 0,
+  "sst_adjust_behavior": 0,
   "pit_distribution_table": 0,
   "pit_display_distribution_table": 0,
   "pit_display_distribution_table_by_attribute": 0,
@@ -80,5 +82,9 @@
   "cit_display_distribution_table_by_attribute": 0,
   "vat_distribution_table": 0,
   "vat_display_distribution_table": 0,
-  "vat_display_distribution_table_by_attribute": 0
+  "vat_display_distribution_table_by_attribute": 0,
+  "sst_distribution_table": 0,
+  "sst_display_distribution_table": 0,
+  "sst_display_distribution_table_by_attribute": 0,
+  "sst_display_revenue_table": 1
 }

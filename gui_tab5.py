@@ -101,6 +101,12 @@ def tab5(self):
         self.vars[tax_type+'_display_distribution_table'] = 0
         self.vars[tax_type+'_display_distribution_table_by_attribute'] = 0
         self.vars[tax_type+'_display_revenue_table'] = 1
+
+    self.vars['sst'+'_distribution_table'] = 0 
+    self.vars['sst'+'_display_distribution_table'] = 0
+    self.vars['sst'+'_display_distribution_table_by_attribute'] = 0
+    self.vars['sst'+'_display_revenue_table'] = 1
+        
     self.save_inputs()
     self.block_distribution_pos_x = self.allocate_pos_x(pos_x, self.status,
                                                     self.block_distribution_pos_x)

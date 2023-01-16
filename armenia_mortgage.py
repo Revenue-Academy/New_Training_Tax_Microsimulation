@@ -147,6 +147,6 @@ for year in range(2021,2027):
 filtercol = [col for col in df if not col.startswith(('Mortgage_bool', 'Mortgage_num', 'Mortgage_bin', 'bin_mortgage'))]
 
 df = df[filtercol]
-df.to_csv('pit_armenia_full_mortgage_updated1.csv')
+df.to_csv('pit_armenia_full_mortgage_updated.csv')
 
 
