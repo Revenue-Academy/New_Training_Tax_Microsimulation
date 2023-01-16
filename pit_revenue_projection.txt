@@ -1,8 +1,7 @@
                    2021    2022    2023    2024    2025    2026    2027
 current_law_All  346.68  344.45  341.97  339.37  336.47  336.47  336.47
-reform_All       346.68  344.45  341.97  339.37  336.47  336.47  336.47
+reform_All       346.68  366.00  365.59  365.15  364.66  364.66  364.66
 
-Empty DataFrame
-Columns: [policy]
-Index: []
+                                        policy
+2022  {'_mortgage_credit_ceiling': [200000.0]}
 

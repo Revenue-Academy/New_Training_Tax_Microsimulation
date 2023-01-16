@@ -31,7 +31,7 @@ def display_distribution_table(self, widget, tax_type, block_1_title_pos_x):
 
 def display_distribution(self, widget, tax_type, block_1_title_pos_x):
     self.active_tax = self.find_active_taxes()
-    #print(self.active_tax)
+    print(self.active_tax)
     if (tax_type not in self.active_tax):
         self.msg_window = tk.Toplevel()
         self.msg_window.geometry("250x100+300+300")
@@ -97,7 +97,7 @@ def tab5(self):
     pos_x = [0.10, 0.40, 0.70]
 
     for tax_type in self.tax_list:
-        self.vars[tax_type+'_distribution_table'] = 0 
+        self.vars[tax_type+'_distribution_table'] = 0
         self.vars[tax_type+'_display_distribution_table'] = 0
         self.vars[tax_type+'_display_distribution_table_by_attribute'] = 0
         self.vars[tax_type+'_display_revenue_table'] = 1
