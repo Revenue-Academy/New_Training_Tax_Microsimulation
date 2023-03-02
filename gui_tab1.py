@@ -33,7 +33,7 @@ def initialize_vars(self):
     self.reform={}
     self.selected_item = ""
     self.selected_value = ""
-    self.selected_year = 2023
+    self.selected_year = 2021
     self.sub_directory = "taxcalc"
     self.year_list = [2021, 2022, 2023, 2024, 2025, 2026, 2027]
     # Include a check whether the years are valid by looking at the 
@@ -57,8 +57,8 @@ def initialize_vars(self):
     
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_pit_armenia.json"
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_pit_armenia.csv"
-    self.vars['pit_data_filename'] = "pit_armenia_full_mortgage_updated1.csv"
-    self.vars['pit_weights_filename'] = "pit_weights_armenia_mortgage_updated.csv"
+    self.vars['pit_data_filename'] = "pit_armenia_full_mortgage_updated1_sample.csv"
+    self.vars['pit_weights_filename'] = "pit_weights_armenia_mortgage_updated_sample.csv"
     self.vars['pit_records_variables_filename'] = "records_variables_pit_armenia.json"
     self.vars['pit_benchmark_filename'] = "tax_incentives_benchmark_pit_training.json"
     #self.vars['pit_elasticity_filename'] = "elasticity_pit_training.json"
@@ -108,7 +108,7 @@ def initialize_vars(self):
     
     self.vars['kakwani_list'] = []
     
-    self.vars['start_year'] = 2023
+    self.vars['start_year'] = 2021
     self.vars['end_year']=2027
     self.vars['pit_data_start_year'] = 2021
     self.vars['cit_data_start_year'] = 2020
@@ -232,7 +232,7 @@ def display_entry(self, widget, tax_type):
         if tax_type == 'pit':
             self.vars['DEFAULTS_FILENAME'] = "current_law_policy_pit_armenia.json"
             self.vars['GROWFACTORS_FILENAME'] = "growfactors_pit_armenia.csv"
-            self.vars['start_year'] = 2023
+            self.vars['start_year'] = 2021
             self.vars['data_start_year'] = 2021
             self.vars['SALARY_VARIABLE'] = "SALARY"
             self.vars['pit_id_var'] = 'id_n'
@@ -241,7 +241,7 @@ def display_entry(self, widget, tax_type):
             
             self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_training.json"    
             self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_training.csv"
-            self.vars['start_year'] = 2023
+            self.vars['start_year'] = 2021
             self.vars['data_start_year'] = 2020
             self.vars['SALARY_VARIABLE'] = "SALARY"
             self.vars['cit_id_var'] = 'Taxpayer_ID'
