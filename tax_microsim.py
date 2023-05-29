@@ -85,6 +85,7 @@ class Application(tk.Frame):
 
         #Create Tab Control
         TAB_CONTROL = ttk.Notebook(master)
+        
 
         self.TAB1 = ttk.Frame(TAB_CONTROL)
         TAB_CONTROL.add(self.TAB1, text=' Start ')
@@ -507,6 +508,9 @@ class Application(tk.Frame):
 def main():
     ctypes.windll.shcore.SetProcessDpiAwareness(1)
     root = tk.Tk()
+    f = tkfont.Font(family='Courier New', size=12)
+    s = ttk.Style()
+    s.configure('.', font=f)
     root.geometry('1000x600')
     root.title("World Bank Microsimulation Model")
     root.state('zoomed')

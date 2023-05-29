@@ -8,7 +8,7 @@
         "row_label": [  
             "2021"
         ],
-        "start_year": 2021,
+        "start_year": [2021, 2022, 2023],
         "cpi_inflatable": false,
         "cpi_inflated": false,
         "col_var": "",
@@ -16,7 +16,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-            0.22
+            0.22, 0.21, 0.2
         ],
         "range": {
             "min": 0,
@@ -92,7 +92,7 @@
         "row_label": [  
             "2021"
         ],
-        "start_year": 2021,
+        "start_year": [2021, 2022, 2023],
         "cpi_inflatable": false,
         "cpi_inflated": false,
         "col_var": "",
@@ -100,7 +100,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-            0.22
+            0.22, 0.21, 0.2
         ],
         "range": {
             "min": 0,
@@ -148,7 +148,7 @@
         "row_label": [  
             "2021"
         ],
-        "start_year": 2021,
+        "start_year": [2021, 2022, 2023],
         "cpi_inflatable": false,
         "cpi_inflated": false,
         "col_var": "",
@@ -156,7 +156,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-            0.22
+            0.22, 0.21, 0.2
         ],
         "range": {
             "min": 0,
@@ -205,7 +205,7 @@
         "row_label": [
             "2021"
         ],
-        "start_year": 2021,
+        "start_year": [2021, 2022, 2023],
         "cpi_inflatable": false,
         "cpi_inflated": false,
         "col_var": "",
@@ -213,7 +213,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-           0.22
+           0.22, 0.21, 0.2
         ],
         "range": {
             "min": 0,
@@ -658,7 +658,7 @@
         "row_label": [
     	"2021"
         ],
-        "start_year": 2021,
+        "start_year": [2021, 2022, 2023],
         "cpi_inflatable": true,
         "cpi_inflated": false,
         "col_var": "",
@@ -666,7 +666,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-    	  68000
+    	  68000, 68000, 75000
         ],
         "range": {
     	"min": 0,
@@ -686,7 +686,7 @@
   		"row_label": [
   			"2021"
   		],
-  		"start_year": 2021,
+  		"start_year": [2021, 2022, 2023],
   		"cpi_inflatable": true,
   		"cpi_inflated": false,
   		"col_var": "",
@@ -694,7 +694,7 @@
   		"boolean_value": false,
   		"integer_value": false,
   		"value": [
-  			0.035
+  			0.035, 0.045, 0.05
   		],
   		"range": {
   			"min": 0,

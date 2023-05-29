@@ -22,7 +22,7 @@ def cal_max_annual_income_lowssc(max_income_pm_low_ssc, max_annual_income_low_ss
 "Calculation of monthly cap for social payment - (15 times the minimum wage per pm)"
 @iterate_jit(nopython=True)
 def cal_max_annual_income_ssc(min_wage_pm, max_annual_income_ssc):
-   max_annual_income_ssc = (min_wage_pm*15)
+   max_annual_income_ssc = (min_wage_pm*15)*12
    return (max_annual_income_ssc)
 
 
