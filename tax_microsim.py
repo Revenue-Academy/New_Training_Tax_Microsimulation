@@ -508,7 +508,7 @@ class Application(tk.Frame):
 def main():
     ctypes.windll.shcore.SetProcessDpiAwareness(1)
     root = tk.Tk()
-    f = tkfont.Font(family='Courier New', size=12)
+    f = tkfont.Font(family='Courier New', size=11)
     s = ttk.Style()
     s.configure('.', font=f)
     root.geometry('1000x600')

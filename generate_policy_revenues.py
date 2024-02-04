@@ -143,7 +143,8 @@ def generate_policy_revenues():
     id_varlist = []
     # start the simulation for pit/cit/vat    
     if global_variables['pit']:
-        tax_list = tax_list + ['pit', 'sst']
+        #tax_list = tax_list + ['pit', 'sst']
+        tax_list = tax_list + ['pit']
         tax_collection_var_list = tax_collection_var_list + ['pitax']
         id_varlist = id_varlist + [global_variables['pit_id_var']]        
         recs = Records(data=global_variables['pit_data_filename'], weights=global_variables['pit_weights_filename'], gfactors=GrowFactors(growfactors_filename=global_variables['GROWFACTORS_FILENAME']))
@@ -273,7 +274,8 @@ def generate_policy_revenues():
         if global_variables[tax_type+'_display_revenue_table']:
             window_dict[tax_type] = tk.Toplevel()
             #window_dict[tax_type].geometry("800x600+600+140")
-            window_dict[tax_type].geometry("600x600+"+str(shift_x)+"+"+str(shift_y))       
+            window_dict[tax_type].geometry("600x600+"+str(shift_x)+"+"+str(shift_y)) 
+            window_dict[tax_type].font = ("Courier New", 12)
             shift_x = shift_x + shift
             shift_y = shift_y            
             #display_table(window, header=True)
@@ -589,10 +591,11 @@ def generate_policy_revenues():
             dt_tax_all12 = dt_tax_all12.reset_index()
             dt_tax_all34 = dt_tax_all34.reset_index()
             # ETR is calculated for the Start Year
-            dt_percentile[tax_type]['All']['ETR'] = dt_percentile[tax_type]['All'][tax_collection_var+'_'+str(start_year)]/dt_percentile[tax_type]['All'][income_measure[tax_type]+'_'+str(start_year)]            
-            dt_percentile[tax_type]['All']['ETR_ref'] = dt_percentile[tax_type]['All'][tax_collection_var+'_ref_'+str(start_year)]/dt_percentile[tax_type]['All'][income_measure[tax_type]+'_ref_'+str(start_year)]            
+            dt_percentile[tax_type]['All']['ETR'] = dt_percentile[tax_type]['All'][tax_collection_var+'_'+str(start_year)]/dt_percentile[tax_type]['All'][income_measure[tax_type]+'_'+str(start_year)]           
+            dt_percentile[tax_type]['All']['ETR_ref'] = dt_percentile[tax_type]['All'][tax_collection_var+'_ref_'+str(start_year)]/dt_percentile[tax_type]['All'][income_measure[tax_type]+'_ref_'+str(start_year)]    
             dt_percentile[tax_type]['All'].update(dt_percentile[tax_type]['All'].select_dtypes(include=np.number).applymap('{:,.4f}'.format))            
-            
+            dt_percentile[tax_type]['All']['ETR'] = dt_percentile[tax_type]['All']['ETR'].fillna(0)
+            dt_percentile[tax_type]['All']['ETR_ref'] = dt_percentile[tax_type]['All']['ETR_ref'].fillna(0)
             # Adjust this for number of years selected
             filename2 = tax_type+'_distribution_table'
             text_output2 = dt12[tax_type]['All'].to_string() + '\n\n'

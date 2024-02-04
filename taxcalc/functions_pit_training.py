@@ -427,7 +427,10 @@ def cal_tti_c_behavior(capital_income_rate_a, capital_income_rate_a_curr_law,
 
 "Calculation for PIT from capital"
 @iterate_jit(nopython=True)
-def cal_pit_c(capital_income_rate_a, capital_income_rate_g, tti_c_a_behavior, tti_c_g_behavior, pit_c):
+def cal_pit_c(capital_income_rate_a, capital_income_rate_g, tti_c_a_behavior, tti_c_g_behavior, capital_income_cap, pit_c):
+    if (tti_c_a_behavior + tti_c_g_behavior) < capital_income_cap:
+        capital_income_rate_a = 0
+        capital_income_rate_g = 0
     pit_c = (tti_c_a_behavior*capital_income_rate_a) + (tti_c_g_behavior*capital_income_rate_g)
     return pit_c
 

@@ -64,7 +64,7 @@
         "row_label": [
             "2021"
         ],
-        "start_year": 2021,
+        "start_year": [2021,2022, 2023],
         "cpi_inflatable": true,
         "cpi_inflated": false,
         "col_var": "",
@@ -73,7 +73,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-           1e+99
+           1e+99, 1e+99, 1e+99
         ],
         "range": {
             "min": 0,
@@ -119,7 +119,7 @@
         "row_label": [
             "2021"
         ],
-        "start_year": 2021,
+        "start_year": [2021,2022, 2023],
         "cpi_inflatable": true,
         "cpi_inflated": false,
         "col_var": "",
@@ -128,7 +128,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-           2e+99
+           2e+99, 2e+99, 2e+99
         ],
         "range": {
             "min": "_tbrk1",
@@ -176,7 +176,7 @@
         "row_label": [
             "2021"
         ],
-        "start_year": 2021,
+        "start_year": [2021, 2022, 2023],
         "cpi_inflatable": true,
         "cpi_inflated": false,
         "col_var": "",
@@ -185,7 +185,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-           3e+99
+           3e+99, 3e+99, 3e+99
         ],
         "range": {
             "min": "_tbrk2",
@@ -233,7 +233,7 @@
         "row_label": [
             "2021"
         ],
-        "start_year": 2021,
+        "start_year": [2021, 2022, 2023],
         "cpi_inflatable": true,
         "cpi_inflated": false,
         "col_var": "",
@@ -242,7 +242,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-               9e+99
+               3e+99, 3e+99, 3e+99
         ],
         "range": {
             "min": 9e+99,
@@ -252,6 +252,34 @@
         "out_of_range_maxmsg": "",
         "out_of_range_action": "stop"
     },
+     "_cap_allowance": {
+         "long_name": "Basic rental income allowance",
+         "description": "Threshold for taxable rental income",
+         "itr_ref": " ",
+         "notes": "",
+         "row_var": "AYEAR",
+         "row_label": [
+             "2021"
+         ],
+         "start_year": 2021,
+         "cpi_inflatable": true,
+         "cpi_inflated": false,
+         "col_var": "",
+         "col_label": [
+         ],
+         "boolean_value": false,
+         "integer_value": false,
+         "value": [
+                 0
+         ],
+         "range": {
+             "min": 0,
+             "max": 9e+99
+         },
+         "out_of_range_minmsg": "",
+         "out_of_range_maxmsg": "",
+         "out_of_range_action": "stop"                
+     },
     "_mortgage_credit_ceiling": {
         "long_name": "Ceiling for mortgage cashback",
         "description": "Ceiling for mortgage cashback",

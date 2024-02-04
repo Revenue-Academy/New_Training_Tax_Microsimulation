@@ -198,11 +198,13 @@ def generate_tax_expenditures():
     revenue_dict0 = weighted_total_tax(calc1, tax_list, 'current_law', year, revenue_dict, GDP_Nominal, attribute_var)
     np.seterr(divide='ignore', invalid='ignore')
     #pol2 = Policy()
-    reform = Calculator.read_json_param_objects(global_variables['pit_benchmark_filename'], None)    
+    #reform = Calculator.read_json_param_objects(global_variables['pit_benchmark_filename'], None)  
+    reform = Calculator.read_json_param_objects(global_variables['cit_benchmark_filename'], None)  
     ref_dict = reform['policy']
     var_list = []
     tax_expenditure_var_list = []
     year=start_year
+    
     for pkey, sdict in ref_dict.items():
             #print(f'pkey: {pkey}')
             #print(f'sdict: {sdict}')

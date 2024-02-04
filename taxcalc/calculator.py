@@ -225,10 +225,13 @@ class Calculator(object):
                 with open(CIT_VAR_INFO_FILENAME) as vfile:
                     self.vardict = json.load(vfile)
                     vfile.close()
-                for k, v in self.vardict["read"].items():
+                #for k, v in self.vardict["calc"].items():
                   #print("key: ", x, "value: ", y)
-                  if self.vardict["read"][k]["cross_year"]=='Yes':
-                      self.CROSS_YEAR_VARS = self.CROSS_YEAR_VARS + [k]
+                  # if self.vardict["read"][k]["cross_year"]=='Yes':
+                  #     self.CROSS_YEAR_VARS = self.CROSS_YEAR_VARS + [k]
+                  #if self.vardict["calc"][k]["cross_year"]=='Yes':
+                      #self.CROSS_YEAR_VARS = self.CROSS_YEAR_VARS + [k]
+                
                 self.ATTRIBUTE_READ_VARS_CIT = list(k for k,
                           v in self.vardict['read'].items()
                           if v['attribute'] == 'Yes')                     
@@ -329,11 +332,11 @@ class Calculator(object):
             for i in range(1, self.max_lag_years):
                 bf_loss[i] = getattr(self.__corprecords, 'newloss'+str(i))           
             #bf_loss1 = self.__records.newloss1
-            
-            #print(bf_loss)
+            print('cf loss old is ', bf_loss)
             cl_wdv = {}
             for var in self.CROSS_YEAR_VARS:
                 cl_wdv[var] = getattr(self.__corprecords, 'Cl'+var[2:])
+            print('cl wdv is ', cl_wdv)
         #cl_wdv_bld = self.__records.Cl_WDV_Bld
 
         next_year = self.__policy.current_year + 1
@@ -352,9 +355,10 @@ class Calculator(object):
             for i in range(1, self.max_lag_years):
                 setattr(self.__corprecords, 'Loss_lag'+str(i), bf_loss[i])                 
             #self.__records.Loss_lag1 = bf_loss1
+            print('bf loss lag 1 is ', self.__corprecords.Loss_lag1)
             for var in self.CROSS_YEAR_VARS:
-                setattr(self.__corprecords, var, cl_wdv[var])
-        
+                setattr(self.__corprecords, 'Op'+var, cl_wdv[var])
+            print('op wdv is ', cl_wdv)
         #self.__records.Op_WDV_Bld = cl_wdv_bld   
         #self.__records.increment_year()
         #self.__gstrecords.increment_year()
@@ -401,7 +405,7 @@ class Calculator(object):
         if self.corprecords is not None:
             for i in range(len(cit_function_names)):
                 func_name = globals()[cit_function_names[str(i)]]
-                #print(self.cit_function_names[str(i)])
+                print(self.cit_function_names[str(i)])
                 func_name(self.__policy, self.__corprecords)
         
         # Individual calculations
@@ -1674,9 +1678,11 @@ class Calculator(object):
         # pylint: disable=too-many-locals
         # strip out //-comments without changing line numbers
         json_str = re.sub('//.*', ' ', text_string)
+        print('json_str', json_str)
         # convert JSON text into a Python dictionary
         try:
             raw_dict = json.loads(json_str)
+            print('raw_dict', raw_dict)
         except ValueError as valerr:
             msg = 'Policy reform text below contains invalid JSON:\n'
             msg += str(valerr) + '\n'
