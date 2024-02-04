@@ -132,7 +132,7 @@ def display_chart(self, event, global_vars):
                  markerfacecolor='None', markeredgecolor='b',
                  label='Reform')
         plt.legend()
-        plt.title('Personal Income Tax forecast (in billions)')
+        plt.title('Income Tax forecast (in billions)')
         pic_filename1 = "rev_forecast.png"
         plt.savefig(pic_filename1)
         self.image = ImageTk.PhotoImage(Image.open("rev_forecast.png"))
@@ -237,8 +237,14 @@ def display_chart(self, event, global_vars):
         #gini_list =  [0.512656785663004, 0.48923307967360324, 0.48409656284722513]
         #df = pd.read_csv('pit_etr'+'.csv', index_col=0)        
         df = df[:-1]
-        df['ETR'] = np.where(df['ETR']>1, np.nan, df['ETR'])
-        df['ETR_ref'] = np.where(df['ETR_ref']>1, np.nan, df['ETR_ref'])
+        # df['ETR'] = np.where(df['ETR']>1, np.nan, df['ETR'])
+        # df['ETR_ref'] = np.where(df['ETR_ref']>1, np.nan, df['ETR_ref'])
+        df=df.fillna(0)
+        df.replace([np.inf, -np.inf], 0, inplace=True)
+        df['ETR'] = np.where(df['ETR']>1, 1, df['ETR'])
+        df['ETR_ref'] = np.where(df['ETR_ref']>1, 1, df['ETR_ref'])
+        df['ETR'] = np.where(df['ETR']<0, 0, df['ETR'])
+        df['ETR_ref'] = np.where(df['ETR_ref']<0, 0, df['ETR_ref'])
         maxy = max(df['ETR'].max(), df['ETR_ref'].max())  
         miny = min(df['ETR'].min(), df['ETR_ref'].min()) 
         d = (maxy - miny)/10

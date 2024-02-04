@@ -370,7 +370,7 @@ def cal_tti_stocks(stocks, tti_stocks):
     
 "Calculation for total tax base from all income sources ("
 @iterate_jit(nopython=True)
-def cal_tti_all(tti_wages,tti_royalty_resident,tti_royalty_non_resident,tti_interest_resident,tti_interest_non_resident,tti_gaining_resident,tti_gaining_non_resident,
+def cal_tti_all(tti_wages, cap_allowance, tti_royalty_resident,tti_royalty_non_resident,tti_interest_resident,tti_interest_non_resident,tti_gaining_resident,tti_gaining_non_resident,
                 tti_prize_resident,tti_prize_non_resident,tti_donation_resident,tti_donation_non_resident,tti_alienation_property_dev_resident,
                 tti_alienation_property_dev_non_resident,tti_alienation_prop_resident,tti_alienation_prop_non_resident,tti_additional_value_prop_resident,
                 tti_additional_value_prop_non_resident,tti_rent_resident,tti_rent_non_resident,tti_dividends_resident,
@@ -378,7 +378,12 @@ def cal_tti_all(tti_wages,tti_royalty_resident,tti_royalty_non_resident,tti_inte
                 tti_voluntary_pensions_resident,tti_voluntary_pensions_non_resident,tti_unpaid_passive_12_month_resident,tti_unpaid_passive_12_month_non_resident,
                 tti_foreign_citizen_stateless_person_resident,tti_foreign_citizen_stateless_person_non_resident,tti_other_income_passive_resident,tti_other_income_passive_non_resident,tti_rent_high,
                 tti_stocks,tti_all):
-    tti_all=tti_wages+tti_royalty_resident+tti_royalty_non_resident+tti_interest_resident+tti_interest_non_resident+tti_gaining_resident+tti_gaining_non_resident+tti_prize_resident+tti_prize_non_resident+tti_donation_resident+tti_donation_non_resident+tti_alienation_property_dev_resident+tti_alienation_property_dev_non_resident+tti_alienation_prop_resident+tti_alienation_prop_non_resident+tti_additional_value_prop_resident+tti_additional_value_prop_non_resident+tti_rent_resident+tti_rent_non_resident+tti_dividends_resident+tti_dividends_non_resident+tti_insurance_premium_resident+tti_insurance_premium_non_resident+tti_voluntary_pensions_resident+tti_voluntary_pensions_non_resident+tti_unpaid_passive_12_month_resident+tti_unpaid_passive_12_month_non_resident+tti_foreign_citizen_stateless_person_resident+tti_foreign_citizen_stateless_person_non_resident+tti_other_income_passive_resident+tti_other_income_passive_non_resident+tti_rent_high+tti_stocks
+    tti_cap=tti_royalty_resident+tti_royalty_non_resident+tti_interest_resident+tti_interest_non_resident+tti_gaining_resident+tti_gaining_non_resident+tti_prize_resident+tti_prize_non_resident+tti_donation_resident+tti_donation_non_resident+tti_alienation_property_dev_resident+tti_alienation_property_dev_non_resident+tti_alienation_prop_resident+tti_alienation_prop_non_resident+tti_additional_value_prop_resident+tti_additional_value_prop_non_resident+tti_rent_resident+tti_rent_non_resident+tti_dividends_resident+tti_dividends_non_resident+tti_insurance_premium_resident+tti_insurance_premium_non_resident+tti_voluntary_pensions_resident+tti_voluntary_pensions_non_resident+tti_unpaid_passive_12_month_resident+tti_unpaid_passive_12_month_non_resident+tti_foreign_citizen_stateless_person_resident+tti_foreign_citizen_stateless_person_non_resident+tti_other_income_passive_resident+tti_other_income_passive_non_resident+tti_rent_high+tti_stocks
+    if tti_cap <= cap_allowance:
+        tti_cap = 0
+    else:
+        tti_cap = tti_cap
+    tti_all=tti_wages+tti_cap
     return (tti_all)
 
 
@@ -585,8 +590,13 @@ def cal_pit_stocks(stocks,rate_stocks, pit_stocks):
 	
 "5.19 Calculation for total tax from all sources"
 @iterate_jit(nopython=True)
-def cal_pit_all(pit_wages,pit_royalty,pit_interest,pit_gaining,pit_prize,pit_donation,pit_alienation_property_dev,pit_alienation_prop,pit_additional_value_prop,pit_rent,pit_dividends,pit_insurance_premium,pit_voluntary_pensions,pit_unpaid_passive_12_month,pit_foreign_citizen_stateless_person,pit_other_income_passive,pit_rent_high,pit_stocks,pitax_all):
-    pitax_all =pit_wages+pit_royalty+pit_interest+pit_gaining+pit_prize+pit_donation+pit_alienation_property_dev+pit_alienation_prop+pit_additional_value_prop+pit_rent+pit_dividends+pit_insurance_premium+pit_voluntary_pensions+pit_unpaid_passive_12_month+pit_foreign_citizen_stateless_person+pit_other_income_passive+pit_rent_high+pit_stocks
+def cal_pit_all(pit_wages, cap_allowance, pit_royalty,pit_interest,pit_gaining,pit_prize,pit_donation,pit_alienation_property_dev,pit_alienation_prop,pit_additional_value_prop,pit_rent,pit_dividends,pit_insurance_premium,pit_voluntary_pensions,pit_unpaid_passive_12_month,pit_foreign_citizen_stateless_person,pit_other_income_passive,pit_rent_high,pit_stocks,pitax_all):
+    pit_capital = pit_royalty+pit_interest+pit_gaining+pit_prize+pit_donation+pit_alienation_property_dev+pit_alienation_prop+pit_additional_value_prop+pit_rent+pit_dividends+pit_insurance_premium+pit_voluntary_pensions+pit_unpaid_passive_12_month+pit_foreign_citizen_stateless_person+pit_other_income_passive+pit_rent_high+pit_stocks
+    if pit_capital < cap_allowance:
+        pit_capital = 0
+    else:
+        pit_capital = pit_capital
+    pitax_all =pit_wages+pit_capital
     return (pitax_all)
 
 
@@ -652,7 +662,7 @@ def cal_tti_wages_behavior(rate1, rate2, rate3, rate4, tbrk1, tbrk2, tbrk3,
 "Calculation behavior"
 @iterate_jit(nopython=True)
 def cal_tti_c_behavior(
-                        rate1,
+                        rate1, cap_allowance,
                         rate_royalty_resident,rate_royalty_non_resident,
                         rate_interest_resident,rate_interest_non_resident,
                         rate_alienation_property_dev_resident,rate_alienation_property_dev_non_resident,
@@ -865,8 +875,15 @@ def cal_tti_c_behavior(
     tti_c_additional_value_prop_non_resident_behavior = tti_additional_value_prop_non_resident*(1+frac_change_tti_additional_value_prop_non_resident) 
  	# 9. Rent-Resident
     tti_c_rent_resident_behavior = tti_rent_resident*(1+frac_change_tti_rent_resident)    
+    #if tti_c_rent_resident_behavior <= cap_allowance:
+        #tti_c_rent_resident_behavior = 0
+    tti_c_rent_resident_behavior = max(tti_rent_resident - cap_allowance, 0)
+     
       # Rent-Non-Resident
     tti_c_rent_non_resident_behavior = tti_rent_non_resident*(1+frac_change_tti_rent_non_resident) 
+    #if tti_c_rent_non_resident_behavior <= cap_allowance:
+        #tti_c_rent_non_resident_behavior = 0
+    tti_c_rent_non_resident_behavior = max(tti_rent_non_resident - cap_allowance, 0)
  	# 10. Dividends-Resident
     tti_c_dividends_resident_behavior = tti_dividends_resident*(1+frac_change_tti_dividends_resident)    
       # Dividends-Non-Resident

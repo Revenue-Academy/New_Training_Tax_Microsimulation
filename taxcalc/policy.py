@@ -223,6 +223,7 @@ class Policy(ParametersBase):
         if not reform:
             return  # no reform to implement
         reform_years = sorted(list(reform.keys()))
+        #print('reform years are', reform_years)
         for year in reform_years:
             if not isinstance(year, int):
                 msg = 'ERROR: {} KEY {}'

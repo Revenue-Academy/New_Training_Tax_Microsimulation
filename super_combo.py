@@ -61,13 +61,14 @@ class super_combo(tk.Frame):
         self.pos_y = position_y
         shift_x = 0
         shift_y = 0
+        font="Courier New"
         self.widget_placement(shift_x, shift_y, self.width_json)
-        self.fontStyle = tkfont.Font(family="Calibri", size="12")
-        self.fontStyle_sub_title = tkfont.Font(family="Calibri", size="14", weight="bold")         
-        self.fontStyle_title = tkfont.Font(family="Calibri", size="18", weight="bold")
+        self.fontStyle = tkfont.Font(family=font, size="14")
+        self.fontStyle_sub_title = tkfont.Font(family=font, size="16", weight="bold")         
+        self.fontStyle_title = tkfont.Font(family=font, size="18", weight="bold")
         self.s = ttk.Style()
         self.s.configure('my.TButton', font=self.fontStyle)        
-        self.text_font = ('Calibri', '12')
+        self.text_font = (font, '12')
         self.block_widget_dict = {}
         return
     
