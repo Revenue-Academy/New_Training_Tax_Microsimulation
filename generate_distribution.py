@@ -376,8 +376,12 @@ def generate_policy_revenues():
             dt_tax_all = dt_tax_all.reset_index()
             print('dt_tax_all ', dt_tax_all)
             #print('dt_percentile ',dt_percentile)
-            dt_percentile[tax_type]['All']['ETR'] = dt_percentile[tax_type]['All'][tax_collection_var+'_'+str(start_year)]/dt_percentile[tax_type]['All'][income_measure[tax_type]+'_'+str(start_year)]            
-            dt_percentile[tax_type]['All']['ETR_ref'] = dt_percentile[tax_type]['All'][tax_collection_var+'_ref_'+str(start_year)]/dt_percentile[tax_type]['All'][income_measure[tax_type]+'_ref_'+str(start_year)]            
+            #dt_percentile[tax_type]['All']['ETR'] = max(dt_percentile[tax_type]['All'][tax_collection_var+'_'+str(start_year)]/dt_percentile[tax_type]['All'][income_measure[tax_type]+'_'+str(start_year)], 0)         
+            #dt_percentile[tax_type]['All']['ETR_ref'] = max(dt_percentile[tax_type]['All'][tax_collection_var+'_ref_'+str(start_year)]/dt_percentile[tax_type]['All'][income_measure[tax_type]+'_ref_'+str(start_year)], 0)  
+            dt_percentile[tax_type]['All']['ETR'] = min(max(dt_percentile[tax_type]['All'][tax_collection_var+'_'+str(start_year)]/dt_percentile[tax_type]['All'][income_measure[tax_type]+'_'+str(start_year)], 0), 0.3)        
+            dt_percentile[tax_type]['All']['ETR_ref'] = min(max(dt_percentile[tax_type]['All'][tax_collection_var+'_ref_'+str(start_year)]/dt_percentile[tax_type]['All'][income_measure[tax_type]+'_ref_'+str(start_year)], 0), 0.3)
+            dt_percentile[tax_type]['All']['ETR'] = dt_percentile[tax_type]['All']['ETR'].fillna(0)
+            dt_percentile[tax_type]['All']['ETR_ref'] = dt_percentile[tax_type]['All']['ETR_ref'].fillna(0)
             dt_percentile[tax_type]['All'].update(dt_percentile[tax_type]['All'].select_dtypes(include=np.number).applymap('{:,.4f}'.format))            
             #dt = dt.reset_index()
             # Adjust this for number of years selected
