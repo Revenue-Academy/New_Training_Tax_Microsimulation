@@ -1,1 +1,20 @@
-{}
+{
+  "1": {
+    "selected_item": "toggle_profit_tax_reduction_citizens",
+    "selected_year": [
+      "2022"
+    ],
+    "selected_value": [
+      "0"
+    ]
+  },
+  "2": {
+    "selected_item": "toggle_profit_tax_reduction_projects",
+    "selected_year": [
+      "2022"
+    ],
+    "selected_value": [
+      "0"
+    ]
+  }
+}

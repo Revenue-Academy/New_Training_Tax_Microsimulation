@@ -33,9 +33,9 @@ def initialize_vars(self):
     self.reform={}
     self.selected_item = ""
     self.selected_value = ""
-    self.selected_year = 2020
+    self.selected_year = 2022
     self.sub_directory = "taxcalc"
-    self.year_list = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030]
+    self.year_list = [2022, 2023, 2024, 2025, 2026, 2027, 2028]
     #self.year_list = [2023, 2024, 2025, 2026, 2027]
     # Include a check whether the years are valid by looking at the 
     # selected growfactors file
@@ -70,17 +70,17 @@ def initialize_vars(self):
     #self.vars['gdp_filename'] = 'gdp_nominal_armenia.csv'
     '''
     
-    self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_training.json"    
-    self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_training.csv"
-    self.vars['cit_data_filename'] = "cit_data_training.csv"
-    self.vars['cit_weights_filename'] = "cit_weights_training.csv"
-    self.vars['cit_records_variables_filename'] = "records_variables_cit_training.json"    
-    self.vars['cit_benchmark_filename'] = "taxcalc/tax_incentives_benchmark_cit_training.json"
+    self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_armenia.json"    
+    self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_armenia.csv"
+    self.vars['cit_data_filename'] = "dataset_cit_arm.csv"
+    self.vars['cit_weights_filename'] = "cit_weights_armenia.csv"
+    self.vars['cit_records_variables_filename'] = "records_variables_cit_armenia.json"    
+    self.vars['cit_benchmark_filename'] = "taxcalc/tax_incentives_benchmark_cit_armenia.json"
     self.vars['cit_elasticity_filename'] = "elasticity_cit_training.json"
-    self.vars['cit_functions_filename'] = "functions_cit_training.py"
-    self.vars['cit_function_names_filename'] = "function_names_cit_training.json"
-    self.vars['cit_distribution_json_filename'] = 'cit_distribution_training.json'
-    self.vars['gdp_filename'] = 'gdp_nominal_cit_training.csv'
+    self.vars['cit_functions_filename'] = "functions_cit_armenia.py"
+    self.vars['cit_function_names_filename'] = "function_names_cit_armenia.json"
+    self.vars['cit_distribution_json_filename'] = 'cit_distribution_armenia.json'
+    self.vars['gdp_filename'] = 'gdp_nominal_cit_armenia.csv'
     '''
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_uganda.json"    
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_uganda.csv"
@@ -123,10 +123,10 @@ def initialize_vars(self):
     
     self.vars['kakwani_list'] = []
     
-    self.vars['start_year'] = 2020
-    self.vars['end_year']=2030
+    self.vars['start_year'] = 2022
+    self.vars['end_year']=2028
     self.vars['pit_data_start_year'] = 2021
-    self.vars['cit_data_start_year'] = 2020
+    self.vars['cit_data_start_year'] = 2022
 
     df= pd.read_csv(self.vars['gdp_filename'])
     df = df.set_index('Year')
@@ -256,8 +256,8 @@ def display_entry(self, widget, tax_type):
             
             self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_training.json"    
             self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_training.csv"
-            self.vars['start_year'] = 2020
-            self.vars['data_start_year'] = 2020
+            self.vars['start_year'] = 2022
+            self.vars['data_start_year'] = 2022
             self.vars['SALARY_VARIABLE'] = "SALARY"
             self.vars['cit_id_var'] = 'id_n'
         
