@@ -1,5 +1,4 @@
-{
-  "read": {
+{  "read": {
     "id_n": {
       "required": true,
       "type": "int",
@@ -20,7 +19,7 @@
       "cross_year": "No",
       "attribute": "No"
     },
-    "TypeOfTax": {
+    "DataSet": {
       "type": "int",
       "desc": " ",
       "form": {
@@ -704,7 +703,7 @@
             "cross_year": "No",
             "attribute": "No"
           },
-        "loss_total": {
+     "loss_total": {
                       "type": "float",
                       "desc": " ",
                       "form": {
@@ -812,6 +811,15 @@
       "cross_year": "No",
       "attribute": "No"
     },
+    "o_pay_150_percent_base": {
+      "type": "float",
+      "desc": " ",
+      "form": {
+        "2022": " "
+      },
+      "cross_year": "No",
+      "attribute": "No"
+    },
     "o_pay_derivative_settlement": {
       "type": "float",
       "desc": " ",
@@ -866,6 +874,7 @@
       "cross_year": "No",
       "attribute": "No"
     },
+     
     "ded_total_licensing": {
       "type": "float",
       "desc": " ",
@@ -893,6 +902,33 @@
           "cross_year": "No",
           "attribute": "No"
         },
+    "Op_WDV_prop": {
+          "type": "float",
+          "desc": "Closing WDV of Buildings asset class",
+          "form": {
+            "2022": "carried forward from Table 411B  - Tax Return Legal Persons"
+          },
+           "cross_year": "Yes",
+           "attribute": "No"
+        },
+    "Op_WDV_intang": {
+          "type": "float",
+          "desc": "Closing WDV of Intangibles asset class",
+          "form": {
+            "2022": "carried forward from Table 411B  - Tax Return Legal Persons"
+          },
+           "cross_year": "Yes",
+           "attribute": "No"
+        },
+    "Op_und_amt": {
+               "type": "float",
+               "desc": "Opening bal of undeducted expenses",
+               "form": {
+                 "2022": "carried forward from Table 411B  - Tax Return Legal Persons"
+               },
+                "cross_year": "No",
+                "attribute": "No"
+             },
 
     "taxable_profit_loss": {
       "type": "float",
@@ -2100,8 +2136,100 @@
               },
               "cross_year": "No",
               "attribute": "No"
-            }    
+              
   },
+      "Loss_lag1": {
+        "type": "float",
+        "desc": "Loss - previous years",
+        "form": {
+          "2021": "Sch 1"
+        },
+        "cross_year": "No",
+        "attribute": "No"
+      },
+       "Loss_lag2": {
+         "type": "float",
+         "desc": "Loss - previous years",
+         "form": {
+           "2021": "Sch 1"
+         },
+         "cross_year": "No",
+         "attribute": "No"
+       },
+        "Loss_lag3": {
+          "type": "float",
+          "desc": "Loss - previous years",
+          "form": {
+            "2021": "Sch 1"
+          },
+          "cross_year": "No",
+          "attribute": "No"
+        },
+         "Loss_lag4": {
+           "type": "float",
+           "desc": "Loss - previous years",
+           "form": {
+             "2021": "Sch 1"
+           },
+           "cross_year": "No",
+           "attribute": "No"
+         },
+          "Loss_lag5": {
+            "type": "float",
+            "desc": "Loss - previous years",
+            "form": {
+              "2021": "Sch 1"
+            },
+            "cross_year": "No",
+            "attribute": "No"
+          },
+           "Loss_lag6": {
+             "type": "float",
+             "desc": "Loss - previous years",
+             "form": {
+               "2021": "Sch 1"
+             },
+             "cross_year": "No",
+             "attribute": "No"
+           },
+            "Loss_lag7": {
+              "type": "float",
+              "desc": "Loss - previous years",
+              "form": {
+                "2021": "Sch 1"
+              },
+              "cross_year": "No",
+              "attribute": "No"
+            },
+             "Loss_lag8": {
+               "type": "float",
+               "desc": "Loss - previous years",
+               "form": {
+                 "2021": "Sch 1"
+               },
+               "cross_year": "No",
+               "attribute": "No"
+             },
+              "Loss_lag9": {
+                "type": "float",
+                "desc": "Loss - previous years",
+                "form": {
+                  "2021": "Sch 1"
+                },
+                "cross_year": "No",
+                "attribute": "No"
+              },
+               "Loss_lag10": {
+                 "type": "float",
+                 "desc": "Loss - previous years",
+                 "form": {
+                   "2021": "Sch 1"
+                 },
+                 "cross_year": "No",
+                 "attribute": "No"
+               }
+  },
+     
   "calc": {
      "calc_income": {
        "type": "float",
@@ -2127,6 +2255,38 @@
       "2022": ""
     }
   },
+   "Op_bal_prop": {
+     "type": "float",
+     "desc": " ",
+     "cross_year": "",
+     "form": {
+       "2022": ""
+     }
+   },
+    "Op_bal_intang": {
+      "type": "float",
+      "desc": " ",
+      "cross_year": "",
+      "form": {
+        "2022": ""
+      }
+    },
+     "add_prop": {
+       "type": "float",
+       "desc": " ",
+       "cross_year": "",
+       "form": {
+         "2022": ""
+       }
+     },
+      "add_intang": {
+        "type": "float",
+        "desc": " ",
+        "cross_year": "",
+        "form": {
+          "2022": ""
+        }
+      },
   "calc_dep": {
     "type": "float",
     "desc": " ",
@@ -2135,6 +2295,22 @@
       "2022": ""
     }
   },
+   "calc_dep_prop": {
+     "type": "float",
+     "desc": " ",
+     "cross_year": "",
+     "form": {
+       "2022": ""
+     }
+   },
+    "calc_dep_intang": {
+      "type": "float",
+      "desc": " ",
+      "cross_year": "",
+      "form": {
+        "2022": ""
+      }
+    },
   "calc_o_pay_other": {
     "type": "float",
     "desc": " ",
@@ -2176,6 +2352,22 @@
       "2022": ""
     }
   },
+  "calc_total_ded_excl_dep": {
+    "type": "float",
+    "desc": " ",
+    "cross_year": "",
+    "form": {
+      "2022": " "
+    }
+   },
+   "calc_total_ded_with_dep": {
+     "type": "float",
+     "desc": " ",
+     "cross_year": "",
+     "form": {
+       "2022": " "
+     }
+    },
    "calc_ded_total_licensing": {
      "type": "float",
      "desc": " ",
@@ -2192,6 +2384,14 @@
            "2022": ""
          }
        },
+    "taxbase_post_adjloss": {
+               "type": "float",
+               "desc": " ",
+               "cross_year": "",
+               "form": {
+                 "2022": ""
+               }
+             },
        
      "calc_incentives_tax_reduction": {
                 "type": "float",
@@ -2233,14 +2433,22 @@
           "2022": ""
         }
       },
-  "calc_taxable_profit_loss": {
-    "type": "float",
-    "desc": " ",
-    "cross_year": "",
-    "form": {
-      "2022": ""
-    }
-  },
+       "calc_taxable_income": {
+         "type": "float",
+         "desc": " ",
+         "cross_year": "",
+         "form": {
+           "2022": ""
+         }
+       },
+ "calc_gti": {
+   "type": "float",
+   "desc": " ",
+   "cross_year": "",
+   "form": {
+     "2022": ""
+   }
+ },
     "calc_taxable_profit_with_incentives": {
       "type": "float",
       "desc": " ",
@@ -2322,6 +2530,99 @@
       "2022": ""
     }
   },
+   "Cl_WDV_prop": {
+     "type": "float",
+     "desc": " ",
+     "cross_year": "",
+     "form": {
+       "2022": ""
+     }
+   },
+    "Cl_WDV_intang": {
+      "type": "float",
+      "desc": " ",
+      "cross_year": "",
+      "form": {
+        "2022": ""
+      }
+    },
+   "newloss1": {
+     "type": "float",
+     "desc": "Carried forward loss - one years old",
+     "form": {
+       "2022": "Sch 412 - Tax Return Legal Persons"
+     }
+   },
+   "newloss2": {
+     "type": "float",
+     "desc": "Carried forward loss - two years old",
+     "form": {
+       "2022": "Sch 412 - Tax Return Legal Persons"
+     }
+   },
+   "newloss3": {
+     "type": "float",
+     "desc": "Carried forward loss - three years old",
+     "form": {
+       "2022": "Sch 412 - Tax Return Legal Persons"
+     }
+   },
+   "newloss4": {
+     "type": "float",
+     "desc": "Carried forward loss - four years old",
+     "form": {
+       "2022": "Sch 412 - Tax Return Legal Persons"
+     }
+   },
+   "newloss5": {
+     "type": "float",
+     "desc": "Carried forward loss - five years old",
+     "form": {
+       "2022": "Sch 412 - Tax Return Legal Persons"
+     }
+   },
+   "newloss6": {
+     "type": "float",
+     "desc": "Carried forward loss - six years old",
+     "form": {
+       "2022": "Sch 412 - Tax Return Legal Persons"
+     }
+   },
+   "newloss7": {
+     "type": "float",
+     "desc": "Carried forward loss - seven years old",
+     "form": {
+       "2022": "Sch 412 - Tax Return Legal Persons"
+     }
+   },
+   "newloss8": {
+     "type": "float",
+     "desc": "Carried forward loss - eight years old",
+     "form": {
+       "2022": "Sch 412 - Tax Return Legal Persons"
+     }
+   },
+   "newloss9": {
+     "type": "float",
+     "desc": "Carried forward loss - nine years old",
+     "form": {
+       "2022": "Sch 412 - Tax Return Legal Persons"
+     }
+   },
+   "newloss10": {
+     "type": "float",
+     "desc": "Carried forward loss - ten years old",
+     "form": {
+       "2022": "Sch 412 - Tax Return Legal Persons"
+     }
+   },
+   "Used_loss_total": {
+     "type": "float",
+     "desc": "Used loss out of brought forward losses or loss lag 1 to 8",
+     "form": {
+       "2022": "Sch 412 - Tax Return Legal Persons"
+     }
+   },
   "calc_min_inc_tax_carried_over": {
     "type": "float",
     "desc": " ",
@@ -2418,6 +2719,143 @@
       "2022": ""
     }
   },
+   "calc_unded_amount_bf_comm_q": {
+     "type": "float",
+     "desc": " ",
+     "cross_year": "",
+     "form": {
+       "2022": ""
+     }
+   },
+    "calc_mintax_comm_q": {
+      "type": "float",
+      "desc": " ",
+      "cross_year": "",
+      "form": {
+        "2022": ""
+      }
+    },
+     "calc_tax_payable_comm": {
+       "type": "float",
+       "desc": " ",
+       "cross_year": "",
+       "form": {
+         "2022": ""
+       }
+     },
+      "Cl_und_amt": {
+        "type": "float",
+        "desc": " ",
+        "cross_year": "",
+        "form": {
+          "2022": ""
+        }
+      },
+       "calc_mintax_catering": {
+         "type": "float",
+         "desc": " ",
+         "cross_year": "",
+         "form": {
+           "2022": ""
+         }
+       },
+        "calc_tax_payable_catering": {
+          "type": "float",
+          "desc": " ",
+          "cross_year": "",
+          "form": {
+            "2022": ""
+          }
+        },
+         "calc_tax_trading": {
+           "type": "float",
+           "desc": " ",
+           "cross_year": "",
+           "form": {
+             "2022": ""
+           }
+         },
+          "calc_tax_newspaper": {
+            "type": "float",
+            "desc": " ",
+            "cross_year": "",
+            "form": {
+              "2022": ""
+            }
+          },
+           "calc_tax_production": {
+             "type": "float",
+             "desc": " ",
+             "cross_year": "",
+             "form": {
+               "2022": ""
+             }
+           },
+            "calc_tax_rent_royalty": {
+              "type": "float",
+              "desc": " ",
+              "cross_year": "",
+              "form": {
+                "2022": ""
+              }
+            },
+             "calc_tax_notary": {
+               "type": "float",
+               "desc": " ",
+               "cross_year": "",
+               "form": {
+                 "2022": ""
+               }
+             },
+              "calc_tax_assets_catering": {
+                "type": "float",
+                "desc": " ",
+                "cross_year": "",
+                "form": {
+                  "2022": ""
+                }
+              },
+               "calc_tax_lottery": {
+                 "type": "float",
+                 "desc": " ",
+                 "cross_year": "",
+                 "form": {
+                   "2022": ""
+                 }
+               },
+                 "calc_tax_other_disp": {
+                   "type": "float",
+                   "desc": " ",
+                   "cross_year": "",
+                   "form": {
+                     "2022": ""
+                   }
+                 },
+                 "calc_TO_all": {
+                   "type": "float",
+                   "desc": " ",
+                   "cross_year": "",
+                   "form": {
+                     "2022": ""
+                   }
+                 },
+                  "calc_TO_tax_other": {
+                    "type": "float",
+                    "desc": " ",
+                    "cross_year": "",
+                    "form": {
+                      "2022": ""
+                    }
+                  },
+                  
+                 "totax": {
+                   "type": "float",
+                   "desc": " ",
+                   "cross_year": "",
+                   "form": {
+                     "2022": ""
+                   }
+                 },
   "calc_tax_calc_pub_cater_q": {
     "type": "float",
     "desc": " ",

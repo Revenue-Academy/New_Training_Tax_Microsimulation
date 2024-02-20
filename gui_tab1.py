@@ -72,7 +72,7 @@ def initialize_vars(self):
     
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_armenia.json"    
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_armenia.csv"
-    self.vars['cit_data_filename'] = "dataset_cit_arm.csv"
+    self.vars['cit_data_filename'] = "cit_data_armenia.csv"
     self.vars['cit_weights_filename'] = "cit_weights_armenia.csv"
     self.vars['cit_records_variables_filename'] = "records_variables_cit_armenia.json"    
     self.vars['cit_benchmark_filename'] = "taxcalc/tax_incentives_benchmark_cit_armenia.json"
@@ -94,7 +94,7 @@ def initialize_vars(self):
     self.vars['cit_distribution_json_filename'] = 'cit_distribution_uganda.json'
     self.vars['gdp_filename'] = 'gdp_nominal_uganda.csv'
     '''
-    self.vars['cit_max_lag_years'] = 10
+    self.vars['cit_max_lag_years'] = 5
 
     self.vars['vat_data_filename'] = "vat.csv"
     self.vars['vat_weights_filename'] = "vat_weights.csv"
@@ -254,8 +254,8 @@ def display_entry(self, widget, tax_type):
            
         elif tax_type == 'cit':
             
-            self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_training.json"    
-            self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_training.csv"
+            self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_armenia.json"    
+            self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_armenia.csv"
             self.vars['start_year'] = 2022
             self.vars['data_start_year'] = 2022
             self.vars['SALARY_VARIABLE'] = "SALARY"

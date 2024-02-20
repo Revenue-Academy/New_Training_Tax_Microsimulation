@@ -220,17 +220,16 @@ class Calculator(object):
         if self.corprecords is not None:            
             if isinstance(corprecords, CorpRecords):
                 self.__corprecords = copy.deepcopy(corprecords)
-                #self.max_lag_years
                 self.CROSS_YEAR_VARS = []
                 with open(CIT_VAR_INFO_FILENAME) as vfile:
                     self.vardict = json.load(vfile)
                     vfile.close()
-                #for k, v in self.vardict["calc"].items():
+                for k, v in self.vardict["read"].items():
                   #print("key: ", x, "value: ", y)
-                  # if self.vardict["read"][k]["cross_year"]=='Yes':
+                  if self.vardict["read"][k]["cross_year"]=='Yes':
+                       self.CROSS_YEAR_VARS = self.CROSS_YEAR_VARS + [k]
+                  # if self.vardict["calc"][k]["cross_year"]=='Yes':
                   #     self.CROSS_YEAR_VARS = self.CROSS_YEAR_VARS + [k]
-                  #if self.vardict["calc"][k]["cross_year"]=='Yes':
-                      #self.CROSS_YEAR_VARS = self.CROSS_YEAR_VARS + [k]
                 
                 self.ATTRIBUTE_READ_VARS_CIT = list(k for k,
                           v in self.vardict['read'].items()
@@ -329,15 +328,30 @@ class Calculator(object):
         # fixed assets to be moved to next year
         if self.corprecords is not None:
             bf_loss={}
-            for i in range(1, self.max_lag_years):
+            for i in range(1, self.max_lag_years+1):
                 bf_loss[i] = getattr(self.__corprecords, 'newloss'+str(i))           
-            #bf_loss1 = self.__records.newloss1
+            df1 = pd.DataFrame.from_dict(bf_loss)
+            df1.to_csv('bf_loss.csv')
             print('cf loss old is ', bf_loss)
             cl_wdv = {}
             for var in self.CROSS_YEAR_VARS:
                 cl_wdv[var] = getattr(self.__corprecords, 'Cl'+var[2:])
             print('cl wdv is ', cl_wdv)
         #cl_wdv_bld = self.__records.Cl_WDV_Bld
+            cl_und_amt = getattr(self.__corprecords, 'Cl_und_amt')
+            cf_loss = {}
+            if self.corprecords is not None:         
+                for i in range(1, self.max_lag_years+1):
+                    setattr(self.__corprecords, 'Loss_lag'+str(i), bf_loss[i]) 
+                    cf_loss[i] = getattr(self.__corprecords, 'Loss_lag'+str(i))
+                df2 = pd.DataFrame.from_dict(cf_loss)  
+                df2.to_csv('cf_loss.csv')              
+                #self.__records.Loss_lag1 = bf_loss1
+                print('bf loss lag 1 is ', self.__corprecords.Loss_lag1)
+                for var in self.CROSS_YEAR_VARS:
+                    setattr(self.__corprecords, 'Op'+var, cl_wdv[var])
+                print('op wdv is ', cl_wdv)
+                setattr(self.__corprecords, 'Op_und_amt', cl_und_amt)
 
         next_year = self.__policy.current_year + 1
         self.__policy.set_year(next_year)
@@ -350,19 +364,24 @@ class Calculator(object):
             self.__corprecords.increment_year()
             
         # populate the opening values of loss and opening balance of
-        # fixed assets from the previous year      
+        # fixed assets from the previous year    
+        cf_loss = {}
         if self.corprecords is not None:         
-            for i in range(1, self.max_lag_years):
-                setattr(self.__corprecords, 'Loss_lag'+str(i), bf_loss[i])                 
+            for i in range(1, self.max_lag_years+1):
+                setattr(self.__corprecords, 'Loss_lag'+str(i), bf_loss[i]) 
+                cf_loss[i] = getattr(self.__corprecords, 'Loss_lag'+str(i))
+            df2 = pd.DataFrame.from_dict(cf_loss)  
+            df2.to_csv('cf_loss.csv')              
             #self.__records.Loss_lag1 = bf_loss1
             print('bf loss lag 1 is ', self.__corprecords.Loss_lag1)
             for var in self.CROSS_YEAR_VARS:
                 setattr(self.__corprecords, 'Op'+var, cl_wdv[var])
             print('op wdv is ', cl_wdv)
-        #self.__records.Op_WDV_Bld = cl_wdv_bld   
-        #self.__records.increment_year()
-        #self.__gstrecords.increment_year()
-        #self.__corprecords.increment_year()
+            setattr(self.__corprecords, 'Op_und_amt', cl_und_amt)
+        # self.__records.Op_WDV_Bld = cl_wdv_bld   
+        # self.__records.increment_year()
+        # self.__gstrecords.increment_year()
+        # self.__corprecords.increment_year()
 
     def advance_to_year(self, year):
         """
@@ -407,6 +426,7 @@ class Calculator(object):
                 func_name = globals()[cit_function_names[str(i)]]
                 print(self.cit_function_names[str(i)])
                 func_name(self.__policy, self.__corprecords)
+                
         
         # Individual calculations
         # Note that the order of calling these functions is important
@@ -659,7 +679,7 @@ class Calculator(object):
         #print('variable_list ', variable_list)
         assert isinstance(variable_list, list)
         arys = [self.carray(vname) for vname in variable_list]
-        #print(arys)
+        print(arys)
         #print('attribute_value ', attribute_value)
         #print('attribute_var ', attribute_var)
         pdf = pd.DataFrame(data=np.column_stack(arys), columns=variable_list)

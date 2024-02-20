@@ -73,17 +73,17 @@ def weighted_total_tax(calc, tax_list, category, year, tax_dict, gdp=None, attri
     for tax_type in tax_list:
         tax_dict[tax_type][year][category] = {}
         tax_dict[tax_type][year][category]['value'] = calc.weighted_total_tax_dict(tax_type, tax_type+'ax')       
-
+        print(tax_dict[tax_type][year][category]['value'])
         tax_dict[tax_type][year][category]['value_bill'] = {}
         tax_dict[tax_type][year][category]['value_bill_str'] = {}
         if gdp is not None:
             tax_dict[tax_type][year][category]['value_gdp'] = {}
             tax_dict[tax_type][year][category]['value_gdp_str'] = {}        
         for k in tax_dict[tax_type][year][category]['value'].keys():
-            tax_dict[tax_type][year][category]['value_bill'][k] = tax_dict[tax_type][year][category]['value'][k]/10**9
+            tax_dict[tax_type][year][category]['value_bill'][k] = tax_dict[tax_type][year][category]['value'][k]/1e+9
             tax_dict[tax_type][year][category]['value_bill_str'][k] = '{0:.2f}'.format(tax_dict[tax_type][year][category]['value_bill'][k])        
             if gdp is not None:
-                tax_dict[tax_type][year][category]['value_gdp'][k] = ((tax_dict[tax_type][year][category]['value'][k]/10**9)/gdp[str(year)])*100
+                tax_dict[tax_type][year][category]['value_gdp'][k] = ((tax_dict[tax_type][year][category]['value'][k]/1e+9)/gdp[str(year)])*100
                 tax_dict[tax_type][year][category]['value_gdp_str'][k] = '{0:.2f}'.format(tax_dict[tax_type][year][category]['value_gdp'][k])  
     #print('tax_dict ', tax_dict)
     return tax_dict
@@ -268,9 +268,9 @@ def generate_policy_revenues():
         df_tax2[tax_type] = {}
         for year in range(data_start_year, end_year+1):
             revenue_dict[tax_type][year]={}
-        #print(tax_type)
-        #print(tax_type+'_display_revenue_table')
-        #print(global_variables[tax_type+'_display_revenue_table'])
+        print(tax_type)
+        print(tax_type+'_display_revenue_table')
+        print(global_variables[tax_type+'_display_revenue_table'])
         if global_variables[tax_type+'_display_revenue_table']:
             window_dict[tax_type] = tk.Toplevel()
             #window_dict[tax_type].geometry("800x600+600+140")
@@ -294,7 +294,11 @@ def generate_policy_revenues():
         calc1.advance_to_year(year)
         calc2.advance_to_year(year)
         calc1.calc_all()
+        data = calc1.dataframe_cit(['id_n', 'Year', 'citax'])
+        data.to_csv('output of calc.csv')
+        
         calc2.calc_all()
+       
         #print("Gini Coefficient", calc1.gini(gross_i_w))
         
         revenue_dict = weighted_total_tax(calc1, tax_list, 'current_law', year, revenue_dict, GDP_Nominal, attribute_var)              
@@ -401,6 +405,7 @@ def generate_policy_revenues():
                 df_tax2[tax_type][year]['All'].set_index(id_var)
             elif tax_type=='cit':
                 df_tax1[tax_type][year]['All'] = calc1.dataframe_cit([id_var, 'weight', income_measure[tax_type], tax_collection_var])
+                #print('df_tax1', df_tax1)
                 df_tax1[tax_type][year]['All'].set_index(id_var)
                 df_tax2[tax_type][year]['All'] = calc2.dataframe_cit([id_var, 'weight', income_measure[tax_type], tax_collection_var])
                 df_tax2[tax_type][year]['All'].set_index(id_var)
@@ -409,8 +414,8 @@ def generate_policy_revenues():
                 df_tax1[tax_type][year]['All'].set_index(id_var)
                 df_tax2[tax_type][year]['All'] = calc2.dataframe_vat([id_var, 'weight', income_measure[tax_type], tax_collection_var])
                 df_tax2[tax_type][year]['All'].set_index(id_var)
-            #print('dt1_percentile[tax_type][year] ', dt1_percentile[tax_type][year])
-    #print('dt1 ',dt1)
+            print('dt1_percentile[tax_type][year] ', dt1_percentile[tax_type][year])
+    print('dt1 ',dt1)
 
     def calc_gini(df_tax12, tax_type):
         """
@@ -534,7 +539,8 @@ def generate_policy_revenues():
                 if adjust_behavior:
                     revenue_dict_df[k]['reform_behavior_'+k1] = revenue_dict[tax_type][k]['reform_behavior']['value_bill_str'][k1]
                     
-        df[tax_type] = pd.DataFrame.from_dict(revenue_dict_df)   
+        df[tax_type] = pd.DataFrame.from_dict(revenue_dict_df)
+        
         df_str = df[tax_type].to_string()
         df_reform = pd.DataFrame.from_dict(reform)
         df_reform_str = df_reform.to_string()

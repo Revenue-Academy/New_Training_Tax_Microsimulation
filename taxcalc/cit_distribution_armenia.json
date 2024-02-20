@@ -64,5 +64,5 @@
     1000000000.0,
     9e+99
   ],
-  "income_measure": "taxable_profit_with_incentives"
+  "income_measure": "calc_gti"
 }

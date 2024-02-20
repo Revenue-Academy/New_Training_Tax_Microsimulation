@@ -14,9 +14,13 @@ import pkg_resources
 import numpy as np
 import pandas as pd
 from taxcalc.utilsprvt import (weighted_count_lt_zero,
-                               weighted_count_gt_zero,
-                               weighted_count)
+                                weighted_count_gt_zero,
+                                weighted_count)
 
+
+# from utilsprvt import (weighted_count_lt_zero,
+#                                weighted_count_gt_zero,
+#                                weighted_count)
 """
 print("in global of utils")
 f = open('global_vars.json')
