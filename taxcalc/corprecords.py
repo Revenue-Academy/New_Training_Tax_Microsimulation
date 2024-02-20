@@ -89,6 +89,8 @@ class CorpRecords(object):
     CIT_WEIGHTS_FILENAME = vars['cit_weights_filename']
     CIT_BLOWFACTORS_FILENAME = 'cit_panel_blowup.csv'
     VAR_INFO_FILENAME = vars['cit_records_variables_filename']
+    
+   
 
     def __init__(self,
                  data=CIT_DATA_FILENAME,
@@ -102,6 +104,7 @@ class CorpRecords(object):
         self.vars = json.load(f)
         # pylint: disable=too-many-arguments,too-many-locals
         self.__data_year = start_year
+      
         # read specified data
         if data_type == 'cross-section':
             self.data_type = data_type
@@ -178,12 +181,17 @@ class CorpRecords(object):
         Also, does extrapolation, reweighting, adjusting for new current year.
         """
         # move to next year
+            
         self.__current_year += 1
         #print('self.__current_year: ',self.__current_year)
         if self.data_type == 'cross-section':
             # apply variable extrapolation grow factors
+            
+                     
             if self.gfactors is not None:
                 self._blowup(self.__current_year)
+                
+                
         else:
             self.increment_panel_year()
         # specify current-year sample weights

@@ -149,10 +149,10 @@ class Application(tk.Frame):
                 with open(self.sub_directory+'/'+global_vars['DEFAULTS_FILENAME']) as f:
                     self.current_law_policy = json.load(f)
                 with open(self.sub_directory+'/'+global_vars[self.tax_type+'_records_variables_filename']) as vfile:
-                    self.vardict = json.load(vfile)              
-                self.ATTRIBUTE_READ_VARS = set(k for k,
-                          v in self.vardict['read'].items()
-                          if v['attribute'] == 'Yes')
+                    self.vardict = json.load(vfile)    
+                    #print(self.vardict)
+                self.ATTRIBUTE_READ_VARS = set(k for k, v in self.vardict['read'].items() if v['attribute'] == 'Yes')
+                #print(self.ATTRIBUTE_READ_VARS)
                 self.vars['attribute_vars'] = list(self.ATTRIBUTE_READ_VARS)
                 self.growfactors = self.get_growfactors_dict(self.sub_directory+'/'+global_vars['GROWFACTORS_FILENAME'], self.ATTRIBUTE_READ_VARS)            
                 #print('self.growfactors ', self.growfactors)

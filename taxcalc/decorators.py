@@ -11,7 +11,7 @@ import ast
 import inspect
 import toolz
 from taxcalc.policy import Policy
-
+#from policy import Policy
 
 def id_wrapper(*dec_args, **dec_kwargs):  # pylint: disable=unused-argument
     """
