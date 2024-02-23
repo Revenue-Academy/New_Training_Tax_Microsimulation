@@ -1,20 +1,20 @@
 {
   "1": {
-    "selected_item": "toggle_profit_tax_reduction_citizens",
+    "selected_item": "tbrk1",
     "selected_year": [
       "2022"
     ],
     "selected_value": [
-      "0"
+      "400"
     ]
   },
   "2": {
-    "selected_item": "toggle_profit_tax_reduction_projects",
+    "selected_item": "rate1",
     "selected_year": [
       "2022"
     ],
     "selected_value": [
-      "0"
+      "0.5"
     ]
   }
 }
