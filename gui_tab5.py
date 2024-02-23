@@ -78,6 +78,7 @@ def display_distribution(self, widget, tax_type, block_1_title_pos_x):
             self.button_generate_distribution.config(command=lambda: self.clicked_generate_distribution('dist_by_income'))
             
         else:
+            #self.vars[tax_type+'_display_revenue_table'] = 1
             self.vars[tax_type+'_display_revenue_table'] = 1
             self.save_inputs()
             self.l1_distribution[tax_type].destroy()
@@ -106,6 +107,11 @@ def tab5(self):
     self.vars['sst'+'_display_distribution_table'] = 0
     self.vars['sst'+'_display_distribution_table_by_attribute'] = 0
     self.vars['sst'+'_display_revenue_table'] = 1
+
+    self.vars['tot'+'_distribution_table'] = 0 
+    self.vars['tot'+'_display_distribution_table'] = 0
+    self.vars['tot'+'_display_distribution_table_by_attribute'] = 0
+    self.vars['tot'+'_display_revenue_table'] = 1
         
     self.save_inputs()
     self.block_distribution_pos_x = self.allocate_pos_x(pos_x, self.status,

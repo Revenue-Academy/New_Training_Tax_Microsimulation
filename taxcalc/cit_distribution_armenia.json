@@ -1,17 +1,17 @@
 {
   "DIST_VARIABLES": [
     "weight",
-    "taxable_profit_with_incentives",
+    "calc_gti",
     "citax"
   ],
   "DIST_TABLE_COLUMNS": [
     "weight",
-    "taxable_profit_with_incentives",
+    "calc_gti",
     "citax"
   ],
   "DIST_TABLE_LABELS": [
     "Returns",
-    "Accounting Profit",
+    "Gross Taxable Profit",
     "Corporate Income Tax"
   ],
   "DECILE_ROW_NAMES": [
