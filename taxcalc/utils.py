@@ -289,6 +289,7 @@ def create_distribution_table(vdf, groupby, distribution_vardict, income_measure
         return sdf
     # main logic of create_distribution_table
     assert isinstance(vdf, pd.DataFrame)
+    #print('vdf is ', vdf)
     assert (groupby == 'weighted_deciles' or
             groupby == 'weighted_percentiles' or
             groupby == 'standard_income_bins')

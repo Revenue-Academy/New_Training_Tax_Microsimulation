@@ -1,5 +1,5 @@
 """
-PIT (personal income tax) Calculator class.
+Tax Calculator class.
 """
 # CODING-STYLE CHECKS:
 # pycodestyle calculator.py
@@ -332,11 +332,11 @@ class Calculator(object):
                 bf_loss[i] = getattr(self.__corprecords, 'newloss'+str(i))           
             df1 = pd.DataFrame.from_dict(bf_loss)
             df1.to_csv('bf_loss.csv')
-            print('cf loss old is ', bf_loss)
+            #print('cf loss old is ', bf_loss)
             cl_wdv = {}
             for var in self.CROSS_YEAR_VARS:
                 cl_wdv[var] = getattr(self.__corprecords, 'Cl'+var[2:])
-            print('cl wdv is ', cl_wdv)
+            #print('cl wdv is ', cl_wdv)
         #cl_wdv_bld = self.__records.Cl_WDV_Bld
             cl_und_amt = getattr(self.__corprecords, 'Cl_und_amt')
             cf_loss = {}
@@ -347,10 +347,10 @@ class Calculator(object):
                 df2 = pd.DataFrame.from_dict(cf_loss)  
                 df2.to_csv('cf_loss.csv')              
                 #self.__records.Loss_lag1 = bf_loss1
-                print('bf loss lag 1 is ', self.__corprecords.Loss_lag1)
+                #print('bf loss lag 1 is ', self.__corprecords.Loss_lag1)
                 for var in self.CROSS_YEAR_VARS:
                     setattr(self.__corprecords, 'Op'+var, cl_wdv[var])
-                print('op wdv is ', cl_wdv)
+                #print('op wdv is ', cl_wdv)
                 setattr(self.__corprecords, 'Op_und_amt', cl_und_amt)
 
         next_year = self.__policy.current_year + 1
@@ -373,10 +373,10 @@ class Calculator(object):
             df2 = pd.DataFrame.from_dict(cf_loss)  
             df2.to_csv('cf_loss.csv')              
             #self.__records.Loss_lag1 = bf_loss1
-            print('bf loss lag 1 is ', self.__corprecords.Loss_lag1)
+            #print('bf loss lag 1 is ', self.__corprecords.Loss_lag1)
             for var in self.CROSS_YEAR_VARS:
                 setattr(self.__corprecords, 'Op'+var, cl_wdv[var])
-            print('op wdv is ', cl_wdv)
+            #print('op wdv is ', cl_wdv)
             setattr(self.__corprecords, 'Op_und_amt', cl_und_amt)
         # self.__records.Op_WDV_Bld = cl_wdv_bld   
         # self.__records.increment_year()
@@ -572,6 +572,14 @@ class Calculator(object):
                 (attribute_types, attribute_data)  = self.get_attribute_types('pit', 0)             
             else:
                 msg = 'tax type record ="{}" is not initialized'
+                raise ValueError(msg.format(tax_type))  
+        elif tax_type == 'tot':
+            if self.corprecords is not None:
+                tax_data = self.carray(variable_name)
+                attribute_var = self.ATTRIBUTE_READ_VARS_CIT                              
+                (attribute_types, attribute_data)  = self.get_attribute_types('cit', 0)             
+            else:
+                msg = 'tax type record ="{}" is not initialized'
                 raise ValueError(msg.format(tax_type))        
         elif tax_type == 'cit':
             if self.corprecords is not None:            
@@ -599,7 +607,10 @@ class Calculator(object):
             wtd_total_tax['All'] = (tax_data * self.array('weight')).sum()
         elif tax_type == 'sst':
             wtd_total_tax = {}
-            wtd_total_tax['All'] = (tax_data * self.array('weight')).sum()        
+            wtd_total_tax['All'] = (tax_data * self.array('weight')).sum()   
+        elif tax_type == 'tot':
+            wtd_total_tax = {}
+            wtd_total_tax['All'] = (tax_data * self.carray('weight')).sum()       
         elif tax_type == 'cit':
             wtd_total_tax = {}
             wtd_total_tax['All'] = (tax_data * self.carray('weight')).sum()
@@ -679,7 +690,7 @@ class Calculator(object):
         #print('variable_list ', variable_list)
         assert isinstance(variable_list, list)
         arys = [self.carray(vname) for vname in variable_list]
-        print(arys)
+        #print(arys)
         #print('attribute_value ', attribute_value)
         #print('attribute_var ', attribute_var)
         pdf = pd.DataFrame(data=np.column_stack(arys), columns=variable_list)
@@ -725,6 +736,17 @@ class Calculator(object):
                         return self.dataframe_cit(DIST_VARIABLES, attribute_value, attribute_var)
                 else:
                         return self.dataframe_cit(DIST_VARIABLES)
+        
+        elif tax_type == 'tot':
+            if self.corprecords is not None:
+                if attribute_var is not None:
+                    if attribute_value == 'All':
+                        return self.dataframe_cit(DIST_VARIABLES)
+                    else:
+                        return self.dataframe_cit(DIST_VARIABLES, attribute_value, attribute_var)
+                else:
+                        return self.dataframe_cit(DIST_VARIABLES)
+                
         elif tax_type == 'vat':        
             if self.gstrecords is not None:
                 if attribute_var is not None:
@@ -1042,10 +1064,12 @@ class Calculator(object):
         for attribute_value in attribute_types:                   
             var_dataframe = self.distribution_table_dataframe(tax_type, distribution_vardict['DIST_VARIABLES'], attribute_value, attribute_var)
             #print('var_dataframe \n', var_dataframe)
+            #print('tax type', tax_type)
             if income_measure is None:
-                imeasure = 'GTI'
+                imeasure = income_measure[str(tax_type)]
             else:
                 imeasure = income_measure
+                #print('income measure', imeasure)
 
             dt1[attribute_value] = create_distribution_table(var_dataframe, groupby, distribution_vardict,
                                             imeasure, averages, scaling)
@@ -1060,11 +1084,11 @@ class Calculator(object):
                 var_dataframe = calc.distribution_table_dataframe(tax_type, distribution_vardict['DIST_VARIABLES'], attribute_value, attribute_var)
                 if have_same_income_measure(self, calc, imeasure):
                     if income_measure is None:
-                        imeasure = 'GTI'
+                        imeasure = 'calc_gti'
                     else:
                         imeasure = income_measure
                 else:
-                    imeasure = 'GTI'
+                    imeasure = 'calc_gti'
                     #imeasure = 'GTI_baseline'
                     var_dataframe[attribute_value][imeasure] = self.array(imeasure)
                 dt2[attribute_value] = create_distribution_table(var_dataframe, groupby, 
@@ -1702,7 +1726,7 @@ class Calculator(object):
         # convert JSON text into a Python dictionary
         try:
             raw_dict = json.loads(json_str)
-            print('raw_dict', raw_dict)
+            #print('raw_dict', raw_dict)
         except ValueError as valerr:
             msg = 'Policy reform text below contains invalid JSON:\n'
             msg += str(valerr) + '\n'
