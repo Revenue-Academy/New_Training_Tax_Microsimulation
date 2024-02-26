@@ -412,23 +412,34 @@ class Application(tk.Frame):
         if run_type=='dist_by_decile':
             self.vars[self.tax_type+'_display_distribution_table_bydecile'] = 1
             self.vars[self.tax_type+'_display_distribution_table_byincome'] = 0
+            self.vars[self.tax_type+'_distribution_table'] = 1
             self.vars[self.tax_type+'_display_revenue_table'] = 0
             self.vars['sst'+'_display_revenue_table'] = 0
-            self.vars[self.tax_type+'_distribution_table'] = 1
+            self.vars['tot'+'_display_revenue_table'] = 0
+            self.vars['tot'+'_display_distribution_table_bydecile'] = 1
+            self.vars['tot'+'_display_distribution_table_byincome'] = 0
+            self.vars['tot'+'_distribution_table'] = 1
         elif run_type=='dist_by_income':
             self.vars[self.tax_type+'_display_distribution_table_bydecile'] = 0
             self.vars[self.tax_type+'_display_distribution_table_byincome'] = 1
+            self.vars[self.tax_type+'_distribution_table'] = 1
             self.vars[self.tax_type+'_display_revenue_table'] = 0
             self.vars['sst'+'_display_revenue_table'] = 0
-            self.vars[self.tax_type+'_distribution_table'] = 1
+            self.vars['tot'+'_display_revenue_table'] = 0
+            self.vars['tot' +'_display_distribution_table_bydecile'] = 0
+            self.vars['tot'+'_display_distribution_table_byincome'] = 1
+            self.vars['tot'+'_distribution_table'] = 1
         #elif run_type == 'rev_behavior':
         else:
             self.vars[self.tax_type+'_display_distribution_table_bydecile'] = 0
             self.vars[self.tax_type+'_display_distribution_table'] = 0
             self.vars[self.tax_type+'_display_revenue_table'] = 1
-            self.vars['sst'+'_display_revenue_table'] = 1            
             self.vars[self.tax_type+'_distribution_table'] = 0
-            
+            self.vars['sst'+'_display_revenue_table'] = 1            
+            self.vars['tot'+'_display_revenue_table'] = 1
+            self.vars['tot' +'_display_distribution_table_bydecile'] = 0
+            self.vars['tot'+'_display_distribution_table_byincome'] = 0
+            self.vars['tot'+'_distribution_table'] = 0
         self.save_inputs()
 
         self.block_selected_dict = self.generate_changes_dict(self.block_widget_dict, 
