@@ -18,6 +18,7 @@
   "cit_functions_filename": "functions_cit_armenia.py",
   "cit_function_names_filename": "function_names_cit_armenia.json",
   "cit_distribution_json_filename": "cit_distribution_armenia.json",
+  "tot_distribution_json_filename": "tot_distribution_armenia.json",
   "cit_max_lag_years": 5,
   "vat_data_filename": "vat.csv",
   "vat_weights_filename": "vat_weights.csv",
@@ -34,7 +35,7 @@
   "sst_display_distribution_table_bydecile": 0,
   "sst_display_revenue_table": 0,
   "tot_display_distribution_table_byincome": 0,
-  "tot_display_distribution_table_bydecile": 0,
+  "tot_display_distribution_table_bydecile": 1,
   "tot_display_revenue_table": 1,
   "cit_display_distribution_table_byincome": 0,
   "cit_display_distribution_table_bydecile": 1,
@@ -43,11 +44,9 @@
   "vat_display_distribution_table_bydecile": 0,
   "vat_display_revenue_table": 1,
   "kakwani_list": [
-    3.0142577010477205,
-    -2.0223991107597086,
-    -2.0223991107597086
+    NaN
   ],
-  "start_year": "2022",
+  "start_year": "2024",
   "end_year": "2028",
   "pit_data_start_year": 2021,
   "cit_data_start_year": 2022,
@@ -66,10 +65,15 @@
   "charts_ready": 1,
   "chart_list": [
     "cit_revenue_projection",
+    "tot_revenue_projection",
     "cit_distribution_table",
     "cit_distribution_table_top1",
     "cit_distribution_table_income_bins",
-    "cit_etr"
+    "cit_etr",
+    "tot_distribution_table",
+    "tot_distribution_table_top1",
+    "tot_distribution_table_income_bins",
+    "tot_etr"
   ],
   "show_error_log": 0,
   "verbose": 0,
@@ -97,7 +101,7 @@
   "sst_distribution_table": 0,
   "sst_display_distribution_table": 0,
   "sst_display_distribution_table_by_attribute": 0,
-  "tot_distribution_table": 0,
+  "tot_distribution_table": 1,
   "tot_display_distribution_table": 0,
   "tot_display_distribution_table_by_attribute": 0
 }

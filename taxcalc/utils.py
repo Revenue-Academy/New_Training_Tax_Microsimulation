@@ -311,6 +311,7 @@ def create_distribution_table(vdf, groupby, distribution_vardict, income_measure
     # construct grouped DataFrame
     gpdf = pdf.groupby('table_row', as_index=False)
     dist_table = stat_dataframe(gpdf, distribution_vardict['DIST_TABLE_COLUMNS'])
+    print('dist_table weighted deciles', dist_table)
     del pdf['table_row']
     # compute sum row
     sum_row = get_sums(dist_table)[dist_table.columns]

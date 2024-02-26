@@ -1,6 +1,6 @@
 {
     "_cit_tax_rate": {
-        "long_name": " ",
+        "long_name": "Profit tax rate",
         "description": " ",
         "itr_ref": " ",
         "notes": "",
@@ -25,7 +25,7 @@
         "out_of_range_action": "stop"
     },
     "_depr_prop_rate": {
-        "long_name": " ",
+        "long_name": "Depreciation rate for physical properties ",
         "description": " ",
         "itr_ref": " ",
         "notes": "",
@@ -50,7 +50,7 @@
         "out_of_range_action": "stop"
     },
     "_depr_int_rate": {
-        "long_name": " ",
+        "long_name": "Depreciation rate for intangibles",
         "description": " ",
         "itr_ref": " ",
         "notes": "",

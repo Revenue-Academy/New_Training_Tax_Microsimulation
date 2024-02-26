@@ -80,6 +80,7 @@ def initialize_vars(self):
     self.vars['cit_functions_filename'] = "functions_cit_armenia.py"
     self.vars['cit_function_names_filename'] = "function_names_cit_armenia.json"
     self.vars['cit_distribution_json_filename'] = 'cit_distribution_armenia.json'
+    self.vars['tot_distribution_json_filename'] = 'tot_distribution_armenia.json'
     self.vars['gdp_filename'] = 'gdp_nominal_cit_armenia.csv'
     '''
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_uganda.json"    
@@ -127,7 +128,7 @@ def initialize_vars(self):
     
     self.vars['kakwani_list'] = []
     
-    self.vars['start_year'] = 2022
+    self.vars['start_year'] = 2024   #this may be different from the start year in globalvars.json which gets updated separately
     self.vars['end_year']=2028
     self.vars['pit_data_start_year'] = 2021
     self.vars['cit_data_start_year'] = 2022
@@ -260,7 +261,7 @@ def display_entry(self, widget, tax_type):
             
             self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_armenia.json"    
             self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_armenia.csv"
-            self.vars['start_year'] = 2022
+            self.vars['start_year'] = 2024
             self.vars['data_start_year'] = 2022
             self.vars['SALARY_VARIABLE'] = "SALARY"
             self.vars['cit_id_var'] = 'id_n'
@@ -397,12 +398,12 @@ def tab1(self):
     #initializing the display widgets 
     font="Courier New"
     self.initialize_vars()
-    self.fontStyle = tkfont.Font(family=font, size="12")
-    self.fontStyle_sub_title = tkfont.Font(family=font, size="14", weight="bold")         
+    self.fontStyle = tkfont.Font(family=font, size="10")
+    self.fontStyle_sub_title = tkfont.Font(family=font, size="13", weight="bold")         
     self.fontStyle_title = tkfont.Font(family=font, size="22", weight="bold")
     self.s = ttk.Style()
     self.s.configure('my.TButton', font=self.fontStyle)        
-    self.text_font = (font, '12')
+    self.text_font = (font, '10')
     
     self.block_settings_pos_x = {}
     self.status = {}
