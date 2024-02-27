@@ -1,6 +1,69 @@
 {
     "policy": {
-    "_depr_prop_rate": {"2021": [0]},
-    "_depr_int_rate": {"2021": [0]}
+        "_ded_disable_rate": {
+            "2022": [
+                1
+            ]
+        },
+        "_rate_ded_total_licensing": {
+            "2022": [
+                0
+            ]
+        },
+        "_rate_ded_total_joint_act": {
+            "2022": [
+                0
+            ]
+        },
+        "_depr_rate_assets_NPO": {
+            "2022": [
+                0.17
+            ]
+        },
+        "_rate_ded_tot_org_prod_border": {
+            "2022": [
+                0
+            ]
+        },
+        "_rate_exempt_patent": {
+            "2022": [
+                0
+            ]
+        },
+        "_rate_exempt_approved_act": {
+            "2022": [
+                0
+            ]
+        },
+        "_rate_tax_exemption": {
+            "2022": [
+                0
+            ]
+        },
+        "_rate_tc_app_projects": {
+            "2022": [
+                0
+            ]
+        },
+        "_rate_tc_free_supply": {
+            "2022": [
+                0
+            ]
+        },
+        "_rate_exp_ded_comm": {
+            "2022": [
+                0
+            ]
+        },
+        "_rate_exp_ded_catering": {
+            "2022": [
+                0
+            ]
+        },
+        "_rate_TO_tax_catering": {
+            "2022": [
+                0
+            ]
+        }
     }
 }
