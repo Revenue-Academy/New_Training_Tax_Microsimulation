@@ -205,6 +205,7 @@ def calc_ded_total_org_production_border_fun(ded_total_org_production_border, ra
 
 
 # 85.Taxable profit or tax loss (([point 41] - [point 41 subpoint 1] - [point 41 subpoint 3]) +  ([point 84] [point 84 subpoint 1] - [point 84 subpoint 3]))
+'''Rate deduction licencing will be 1 in the benchmark, if patent income is taxable and the deduction is need to allowed '''
 @iterate_jit(nopython=True)
 def calc_taxable_income_fun(rate_exempt_patent,rate_exempt_approved_act, calc_income, inc_licensing, inc_border, calc_taxable_income):
     calc_taxable_income = calc_income - (inc_licensing * rate_exempt_patent)  - (inc_border * rate_exempt_approved_act)

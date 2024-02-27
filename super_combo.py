@@ -161,7 +161,7 @@ class super_combo(tk.Frame):
             self.num_widgets += 1
             num = self.num_widgets
             self.block_widget_dict[num] = {}
-            self.block_widget_dict[num][1] = ttk.Combobox(tab, value=self.policy_options_list[0], font=self.text_font, name=str(num))
+            self.block_widget_dict[num][1] = ttk.Combobox(tab, value=self.policy_options_list, font=self.text_font, name=str(num))
             if (self.num_widgets==1):
                 self.combo_new_y = self.combo_y + self.combo_combo_gap_y*(self.num_widgets-1)
             else:
