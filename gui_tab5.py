@@ -26,8 +26,7 @@ from PIL import Image,ImageTk
 def display_distribution_table(self, widget, tax_type, block_1_title_pos_x):
     #print("I am inside display distribution table")
     self.vars[tax_type+'_display_distribution_table_by_attribute'] = int(widget.get())
-    #print("self.vars[tax_type+'_display_distribution_table'] ",self.vars[tax_type+'_display_distribution_table'])
-    #print("tax_type+'_distribution_json_filename' ", self.vars[tax_type+'_distribution_json_filename'])    
+     
 
 def display_distribution(self, widget, tax_type, block_1_title_pos_x):
     self.active_tax = self.find_active_taxes()

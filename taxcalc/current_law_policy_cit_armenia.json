@@ -753,6 +753,62 @@
        "out_of_range_maxmsg": "for _TO_thold2",
        "out_of_range_action": "stop"
    },
+    "_rate_mat": {
+        "long_name": "Turnover based MAT",
+        "description": "Applicable to Turnover",
+        "itr_ref": "R code",
+        "notes": "",
+        "row_var": "AYEAR",
+        "row_label": [
+            "2022"
+        ],
+        "start_year": 2022,
+        "cpi_inflatable": true,
+        "cpi_inflated": false,
+        "col_var": "",
+        "col_label": [
+        ],
+        "boolean_value": false,
+        "integer_value": false,
+        "value": [
+           0
+        ],
+        "range": {
+            "min": 0,
+            "max": 1
+        },
+        "out_of_range_minmsg": "",
+        "out_of_range_maxmsg": "for _TO_thold2",
+        "out_of_range_action": "stop"
+    },
+     "_rate_ded_div": {
+         "long_name": "Rate of deduction of dividends from taxable income",
+         "description": "Rate of deduction of dividends",
+         "itr_ref": "R code",
+         "notes": "",
+         "row_var": "AYEAR",
+         "row_label": [
+             "2022"
+         ],
+         "start_year": 2022,
+         "cpi_inflatable": true,
+         "cpi_inflated": false,
+         "col_var": "",
+         "col_label": [
+         ],
+         "boolean_value": false,
+         "integer_value": false,
+         "value": [
+            1
+         ],
+         "range": {
+             "min": 0,
+             "max": 1
+         },
+         "out_of_range_minmsg": "",
+         "out_of_range_maxmsg": "for _TO_thold2",
+         "out_of_range_action": "stop"
+     },
 "_elasticity_cit_taxable_income_value": {
         "long_name": "Elasticity of Taxable Income",
         "description": "elasticity",

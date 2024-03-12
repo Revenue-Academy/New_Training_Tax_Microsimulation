@@ -155,10 +155,7 @@ class Application(tk.Frame):
                 #print(self.ATTRIBUTE_READ_VARS)
                 self.vars['attribute_vars'] = list(self.ATTRIBUTE_READ_VARS)
                 self.growfactors = self.get_growfactors_dict(self.sub_directory+'/'+global_vars['GROWFACTORS_FILENAME'], self.ATTRIBUTE_READ_VARS)            
-                #print('self.growfactors ', self.growfactors)
-                #self.elasticity_json = self.get_elasticity_dict(self.tax_type)
-                #print('self.elasticity_json ', self.elasticity_json)
-            
+                            
             else:
                 self.current_law_policy={}
                 self.growfactors = {}
@@ -394,9 +391,7 @@ class Application(tk.Frame):
             print('Changes to Parameters ', selected_dict)
         return selected_dict
     
-    #def clicked_generate_policy_revenues(self, run_type):
-    #    self.run_core_program(run_type)
-    
+       
     def clicked_generate_policy_revenues(self):
         self.run_core_program('revenue')
 
