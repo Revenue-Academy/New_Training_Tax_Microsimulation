@@ -150,7 +150,9 @@ def generate_policy_revenues():
         tax_collection_var_list = tax_collection_var_list + ['pitax']
         id_varlist = id_varlist + [global_variables['pit_id_var']]        
         recs = Records(data=global_variables['pit_data_filename'], weights=global_variables['pit_weights_filename'], gfactors=GrowFactors(growfactors_filename=global_variables['GROWFACTORS_FILENAME']))
-        tax_collection_var = 'pitax'
+        tax_collection_var = {}
+        for tax_type in tax_list:
+            tax_collection_var[tax_type] = tax_type+'ax'
     else:
         recs = None
     if global_variables['cit']:
@@ -479,9 +481,9 @@ def generate_policy_revenues():
                                                     scaling=True, attribute_var=dist_table_attribute_var)
 
             if tax_type=='pit':
-                df_tax1[tax_type][year]['All'] = calc1.dataframe([id_var, 'weight', income_measure[tax_type], tax_collection_var])
+                df_tax1[tax_type][year]['All'] = calc1.dataframe([id_var, 'weight', income_measure[tax_type], tax_collection_var[tax_type]])
                 df_tax1[tax_type][year]['All'].set_index(id_var)
-                df_tax2[tax_type][year]['All'] = calc2.dataframe([id_var, 'weight', income_measure[tax_type], tax_collection_var])
+                df_tax2[tax_type][year]['All'] = calc2.dataframe([id_var, 'weight', income_measure[tax_type], tax_collection_var[tax_type]])
                 df_tax2[tax_type][year]['All'].set_index(id_var)
             elif tax_type=='cit':
                 # distribution_json_filename[tax_type] = 'taxcalc/'+global_variables[tax_type+'_distribution_json_filename']
@@ -516,15 +518,21 @@ def generate_policy_revenues():
         Return gini.
         """
 
-        df_tax12[tax_type]['All']['weight'] = df_tax12[tax_type]['All']['weight'+'_'+str(start_year)]
-        df_tax12[tax_type]['All']['pre_tax_income'] = df_tax12[tax_type]['All'][income_measure[tax_type]+'_'+str(start_year)]        
-        df_tax12[tax_type]['All']['pitax_current_law'] = df_tax12[tax_type]['All'][tax_collection_var[tax_type]+'_'+str(start_year)]
-        df_tax12[tax_type]['All']['pitax_reform'] = df_tax12[tax_type]['All'][tax_collection_var[tax_type]+'_ref_'+str(start_year)]   
+        # df_tax12[tax_type]['All']['weight'] = df_tax12[tax_type]['All']['weight'+'_'+str(start_year)]
+        # df_tax12[tax_type]['All']['pre_tax_income'] = df_tax12[tax_type]['All'][income_measure[tax_type]+'_'+str(start_year)]        
+        # df_tax12[tax_type]['All']['pitax_current_law'] = df_tax12[tax_type]['All'][tax_collection_var[tax_type]+'_'+str(start_year)]
+        # df_tax12[tax_type]['All']['pitax_reform'] = df_tax12[tax_type]['All'][tax_collection_var[tax_type]+'_ref_'+str(start_year)]   
         gini = pd.DataFrame()
-        gini['weight'] = df_tax12[tax_type]['All']['weight']
-        gini['pre_tax_income'] = df_tax12[tax_type]['All']['pre_tax_income']
-        gini['pitax_current_law'] = df_tax12[tax_type]['All']['pitax_current_law']
-        gini['pitax_reform'] = df_tax12[tax_type]['All']['pitax_reform']
+        # gini['weight'] = df_tax12[tax_type]['All']['weight']
+        # gini['pre_tax_income'] = df_tax12[tax_type]['All']['pre_tax_income']
+        # gini['pitax_current_law'] = df_tax12[tax_type]['All']['pitax_current_law']
+        # gini['pitax_reform'] = df_tax12[tax_type]['All']['pitax_reform']
+        
+        gini['weight'] = df_tax12['All']['weight'+'_'+str(start_year)]
+        gini['pre_tax_income'] =abs(df_tax12['All'][income_measure[tax_type]+'_'+str(start_year)])
+        gini['pitax_current_law'] = df_tax12['All'][tax_collection_var[tax_type]+'_'+str(start_year)]
+        gini['pitax_reform'] = df_tax12['All'][tax_collection_var[tax_type]+'_ref_'+str(start_year)] 
+        
         
         #gini.to_csv('df_for_gini.csv', index=False)
         #print('df ', df)

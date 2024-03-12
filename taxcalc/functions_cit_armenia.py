@@ -144,7 +144,7 @@ def calc_o_pay_150_percent_fun(ded_disable_rate, o_pay_150_percent_base, calc_o_
 
 # 83. Total other payments (the sum of other deductions specified in points 68-82)
 @iterate_jit(nopython=True)
-def calc_other_pay_fun(o_pay_invalid, o_pay_bad_debt, o_pay_bad_debt_excess, o_pay_repaying,
+def calc_other_pay_fun(rate_ded_div, o_pay_invalid, o_pay_bad_debt, o_pay_bad_debt_excess, o_pay_repaying,
                         o_pay_possible_loss, o_pay_insurance_reinsurance, o_pay_technical_reserve,
                         o_pay_loss_counterfeit, o_pay_tax_loss, calc_o_pay_value_of_assets, calc_o_pay_150_percent,
                         o_pay_derivative_settlement, o_pay_resident_dividends, o_pay_voluntary_pension,
@@ -152,7 +152,7 @@ def calc_other_pay_fun(o_pay_invalid, o_pay_bad_debt, o_pay_bad_debt_excess, o_p
     calc_other_pay = (o_pay_invalid + o_pay_bad_debt + o_pay_bad_debt_excess + o_pay_repaying + \
                       o_pay_possible_loss + o_pay_insurance_reinsurance + o_pay_technical_reserve + \
                       o_pay_loss_counterfeit + o_pay_tax_loss + calc_o_pay_value_of_assets + calc_o_pay_150_percent + \
-                      o_pay_derivative_settlement + o_pay_resident_dividends + o_pay_voluntary_pension + o_pay_other)
+                      o_pay_derivative_settlement + o_pay_resident_dividends * rate_ded_div + o_pay_voluntary_pension + o_pay_other)
     
     return calc_other_pay
 
@@ -205,7 +205,6 @@ def calc_ded_total_org_production_border_fun(ded_total_org_production_border, ra
 
 
 # 85.Taxable profit or tax loss (([point 41] - [point 41 subpoint 1] - [point 41 subpoint 3]) +  ([point 84] [point 84 subpoint 1] - [point 84 subpoint 3]))
-'''Rate deduction licencing will be 1 in the benchmark, if patent income is taxable and the deduction is need to allowed '''
 @iterate_jit(nopython=True)
 def calc_taxable_income_fun(rate_exempt_patent,rate_exempt_approved_act, calc_income, inc_licensing, inc_border, calc_taxable_income):
     calc_taxable_income = calc_income - (inc_licensing * rate_exempt_patent)  - (inc_border * rate_exempt_approved_act)
@@ -318,179 +317,15 @@ def calc_income_tax_ded_fun(calc_profit_tax_reduction_projects, calc_profit_tax_
 #     else:
 #         calc_profit_tax_after_ded=0
 #         return (calc_profit_tax_after_ded)
+
 @iterate_jit(nopython=True)
-def calc_cit_liability(calc_profit_tax_reporting,calc_income_tax_ded,citax):
-    citax= max(calc_profit_tax_reporting - calc_income_tax_ded, 0) 
+def calc_cit_liability(rate_mat, calc_income, calc_profit_tax_reporting,calc_income_tax_ded,citax):
+    matax = rate_mat * calc_income
+    citax= max(max(calc_profit_tax_reporting - calc_income_tax_ded, 0), matax) 
+    mat_credit = max(matax - citax, 0)
     return (citax)
     
-
-  
-
-# # 95 The amount of profit tax charged in foreign countries or other tax calculated on profit from the profit tax of the reporting year(([point 93] + [point 94]), if ([point 93]+[point 94])<[point 92], or [point 92])**
-# @iterate_jit(nopython=True)
-# def reduced_income_foreign_profits_fun(foreign_tax_ded_previous, foreign_tax_ded_reporting, profit_tax_after_ded):
-#     calc_reduced_income_foreign_profits = foreign_tax_ded_previous + foreign_tax_ded_reporting
-
-#     if calc_reduced_income_foreign_profits < profit_tax_after_ded:
-#         return calc_reduced_income_foreign_profits
-#     else:
-#         calc_reduced_income_foreign_profits=profit_tax_after_ded
-#         return (calc_reduced_income_foreign_profits)
-
-
-# # 96 The amount of profit tax or other tax calculated on profits in foreign countries carried over to subsequent years (([point 93] + [point 94] – [point 95]), if ([point 93] + [point 94] – [point 95])<0, or 0)**
-# @iterate_jit(nopython=True)
-# def calc_tax_foreign_profits_carried_over_fun(foreign_tax_ded_previous,foreign_tax_ded_reporting, reduced_income_foreign_profits):
-#     calc_tax_foreign_profits_carried_over = (foreign_tax_ded_previous + foreign_tax_ded_reporting)-reduced_income_foreign_profits
-#     if calc_tax_foreign_profits_carried_over < 0:
-#         return calc_tax_foreign_profits_carried_over
-#     else:
-#         calc_tax_foreign_profits_carried_over=0
-#         return (calc_tax_foreign_profits_carried_over)
-
-
-# # 98   Profit tax amount after deductions (([point 92] + [point 95] + [point 97]), if ([point 92] + [point 95] + [point 97])>0, or 0)
-# @iterate_jit(nopython=True)
-# def profit_tax_after_deductions_fun(profit_tax_after_ded,reduced_income_foreign_profits,profit_tax_withheld_tax_agent):
-#     calc_profit_tax_after_deductions= profit_tax_after_ded + reduced_income_foreign_profits + profit_tax_withheld_tax_agent
-#     if calc_profit_tax_after_deductions > 0:
-#         return calc_profit_tax_after_deductions
-#     else:
-#         calc_profit_tax_after_deductions=0
-#         return (calc_profit_tax_after_deductions)
-
-
-# # 100 Total sum of profit tax ([point 98] + [point 99]) calc_total_profit_tax= (profit_tax_after_deductions+profit_tax_non_attributable )
-# @iterate_jit(nopython=True)
-# def calc_total_profit_tax_fun(profit_tax_after_deductions, profit_tax_non_attributable,calc_total_profit_tax):
-#     calc_total_profit_tax = profit_tax_after_deductions+profit_tax_non_attributable
-#     return calc_total_profit_tax
-
-
-# # 102 The amount of profit tax after reducing the sum of calculated advance payments of profit tax in the reporting year (([point 100] + [point 101]), if ([point 100] + [point 101])>0, or 0)
-# @iterate_jit(nopython=True)
-# def profit_tax_after_ded_adv_pay_fun(total_profit_tax,total_advance_pay):
-#     calc_profit_tax_after_ded_adv_pay= total_profit_tax + total_advance_pay
-#     if calc_profit_tax_after_ded_adv_pay > 0:
-#         return calc_profit_tax_after_ded_adv_pay
-#     else:
-#         calc_profit_tax_after_ded_adv_pay=0
-#         return (calc_profit_tax_after_ded_adv_pay)
-
-
-# # 104 The amount of profit tax payable # (([point 102] + [point 103]), if ([point 102] + [point 103])>0, or 0)**
-# @iterate_jit(nopython=True)
-# def profit_tax_payable_fun(profit_tax_after_ded_adv_pay,min_profit_tax_not_ded,calc_profit_tax_payable):
-#     calc_profit_tax_payable= profit_tax_after_ded_adv_pay + min_profit_tax_not_ded
-#     if calc_profit_tax_payable > 0:
-#         return calc_profit_tax_payable
-#     else:
-#         calc_profit_tax_payable=0
-#         return calc_profit_tax_payable  
-# # def cit_liability(profit_tax_after_ded_adv_pay,min_profit_tax_not_ded):
-# #     citax= profit_tax_after_ded_adv_pay + min_profit_tax_not_ded
-# #     if citax > 0:
-# #         return citax
-# #     else:
-# #         citax=0
-# #         return citax
-    
-
-# # 105 The amount of non-offset minimum profit tax carried over to subsequent years (([point 102]+[point 103]), if ([point 102] + [point 103]<0), or 0)**
-# @iterate_jit(nopython=True)
-# def min_inc_tax_carried_over_fun(profit_tax_after_ded_adv_pay,min_profit_tax_not_ded):
-#     calc_min_inc_tax_carried_over= profit_tax_after_ded_adv_pay + min_profit_tax_not_ded
-#     if calc_min_inc_tax_carried_over < 0:
-#         return calc_min_inc_tax_carried_over
-#     else:
-#         calc_min_inc_tax_carried_over=0
-#         return (calc_min_inc_tax_carried_over)
-
-
-# # 106 The amount of profit tax to be reimbursed from the budget (([point 88] + [point 91] + [point 95] + [point 97] + [point 99] + [point 101]), if ([point 88] + [point 91] + [point 95] + [point 97] + [point 99] + [point 101])<0, or 0)**
-# @iterate_jit(nopython=True)
-# def profit_tax_reimbursed_budget_fun(calc_profit_tax_reporting,income_tax_ded,reduced_income_foreign_profits,profit_tax_withheld_tax_agent,profit_tax_non_attributable,total_advance_pay):
-#     calc_profit_tax_reimbursed_budget= calc_profit_tax_reporting+income_tax_ded+reduced_income_foreign_profits+profit_tax_withheld_tax_agent+profit_tax_non_attributable+total_advance_pay
-#     if calc_profit_tax_reimbursed_budget < 0:
-#         return calc_profit_tax_reimbursed_budget
-#     else:
-#         calc_profit_tax_reimbursed_budget=0
-#         return (calc_profit_tax_reimbursed_budget)
-
-
-'''
-           Section 2.
  
-Income not attributed to the permanent establishment received by a non-resident profit taxpayers carrying out activities in the Republic of Armenia 
-through a permanent establishment, who are not considered tax agents, and the amounts of profit tax calculated with respect to them
-
-'''
-# @iterate_jit(nopython=True)
-# def calc_other_revenues_fun(inc_001_ins_ben, inc_002_reins_premiums, inc_003_rev_trans, inc_004_div,
-#                         inc_005_interests, inc_006_royalties, inc_007_rental_fees,
-#                         inc_008_inc_value_assets, inc_009_inc_value_assets_sale_securities,
-#                         inc_010_div_received_pan_armenian, inc_099_other_revenues_RA,calc_inc_total_0):
-#     calc_inc_total_0 = (
-#         inc_001_ins_ben + inc_002_reins_premiums + inc_003_rev_trans + inc_004_div +
-#         inc_005_interests + inc_006_royalties + inc_007_rental_fees +
-#         inc_008_inc_value_assets + inc_009_inc_value_assets_sale_securities +
-#         inc_010_div_received_pan_armenian + inc_099_other_revenues_RA
-#     )
-#     return calc_inc_total_0
-
-
-# @iterate_jit(nopython=True)
-# def calc_other_revenues_1_fun(inc_001_ins_ben_1, inc_002_reins_premiums_1, inc_003_rev_trans_1, inc_004_div_1,
-#                           inc_005_interests_1, inc_006_royalties_1, inc_007_rental_fees_1,
-#                           inc_008_inc_value_assets_1, inc_009_inc_value_assets_sale_securities_1,
-#                           inc_010_div_received_pan_armenian_bank_1, inc_099_other_revenues_RA_1,calc_inc_total_1):
-#     calc_inc_total_1 = (
-#         inc_001_ins_ben_1 + inc_002_reins_premiums_1 + inc_003_rev_trans_1 + inc_004_div_1 +
-#         inc_005_interests_1 + inc_006_royalties_1 + inc_007_rental_fees_1 +
-#         inc_008_inc_value_assets_1 + inc_009_inc_value_assets_sale_securities_1 +
-#         inc_010_div_received_pan_armenian_bank_1 + inc_099_other_revenues_RA_1
-#     )
-#     return calc_inc_total_1
-
-# @iterate_jit(nopython=True)
-# def calc_other_revenues_2_fun(inc_001_ins_ben_2, inc_002_reins_premiums_2, inc_003_rev_trans_2, inc_004_div_2,
-#                           inc_005_interests_2, inc_006_royalties_2, inc_007_rental_fees_2,
-#                           inc_008_inc_value_assets_2, inc_009_inc_value_assets_sale_securities_2,
-#                           inc_010_div_received_pan_armenian_bank_2, inc_099_other_revenues_RA_2,calc_inc_total_2):
-#     calc_inc_total_2 = (
-#         inc_001_ins_ben_2 + inc_002_reins_premiums_2 + inc_003_rev_trans_2 + inc_004_div_2 +
-#         inc_005_interests_2 + inc_006_royalties_2 + inc_007_rental_fees_2 +
-#         inc_008_inc_value_assets_2 + inc_009_inc_value_assets_sale_securities_2 +
-#         inc_010_div_received_pan_armenian_bank_2 + inc_099_other_revenues_RA_2
-#     )
-#     return calc_inc_total_2
-
-# @iterate_jit(nopython=True)
-# def calc_other_revenues_3_fun(inc_001_ins_ben_3, inc_002_reins_premiums_3, inc_003_rev_trans_freight_3,
-#                           inc_004_div_3, inc_005_interests_3, inc_006_royalties_3,
-#                           inc_007_rental_fees_3, inc_008_inc_value_assets_3,
-#                           inc_009_inc_value_assets_sale_securities_3,
-#                           inc_10_div_received_pan_armenian_bank_3, inc_099_other_revenues_RA_3,calc_inc_total_3):
-#     calc_inc_total_3 = (
-#         inc_001_ins_ben_3 + inc_002_reins_premiums_3 + inc_003_rev_trans_freight_3 +
-#         inc_004_div_3 + inc_005_interests_3 + inc_006_royalties_3 +
-#         inc_007_rental_fees_3 + inc_008_inc_value_assets_3 +
-#         inc_009_inc_value_assets_sale_securities_3 +
-#         inc_10_div_received_pan_armenian_bank_3 + inc_099_other_revenues_RA_3
-#     )
-#     return calc_inc_total_3
-
-
-# @iterate_jit(nopython=True)
-# def calc_total_profit_tax_amount_fun(inc_total_1, inc_total_3,calc_total_profit_tax_amount):
-#     calc_total_profit_tax_amount = (
-#         inc_total_1+inc_total_3
-#     )
-#     return calc_total_profit_tax_amount
-
-
-
-
 '''
 -------------------------------------------------------------------------------------
 II. TURNOVER TAX CALCULATION 

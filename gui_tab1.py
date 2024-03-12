@@ -35,14 +35,14 @@ def initialize_vars(self):
     self.selected_value = ""
     self.selected_year = 2022
     self.sub_directory = "taxcalc"
-    self.year_list = [2022, 2023, 2024, 2025, 2026, 2027, 2028]
+    self.year_list = [2021, 2022, 2023, 2024, 2025, 2026, 2027]
     #self.year_list = [2023, 2024, 2025, 2026, 2027]
     # Include a check whether the years are valid by looking at the 
     # selected growfactors file
         
      
     ##### NOTE 'Year' is a key word for year in records variable
-    
+    '''
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_pit_training.json"
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_pit_training.csv"
     self.vars['pit_data_filename'] = "pit_data_training.csv"
@@ -54,8 +54,8 @@ def initialize_vars(self):
     self.vars['pit_function_names_filename'] = "function_names_pit_training.json"
     self.vars['pit_distribution_json_filename'] = 'pit_distribution_training.json'  
     self.vars['gdp_filename'] = 'gdp_nominal_training.csv'
-    
     '''
+    
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_pit_armenia.json"
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_pit_armenia.csv"
     self.vars['pit_data_filename'] = "pit_armenia_full_mortgage_updated1_sample.csv"
@@ -68,8 +68,8 @@ def initialize_vars(self):
     self.vars['pit_function_names_filename'] = "function_names_pit_armenia.json"
     self.vars['pit_distribution_json_filename'] = 'pit_distribution_armenia.json'  
     #self.vars['gdp_filename'] = 'gdp_nominal_armenia.csv'
-    '''
     
+
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_armenia.json"    
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_armenia.csv"
     self.vars['cit_data_filename'] = "cit_data_armenia.csv"
@@ -82,6 +82,7 @@ def initialize_vars(self):
     self.vars['cit_distribution_json_filename'] = 'cit_distribution_armenia.json'
     self.vars['tot_distribution_json_filename'] = 'tot_distribution_armenia.json'
     self.vars['gdp_filename'] = 'gdp_nominal_cit_armenia.csv'
+ 
     '''
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_uganda.json"    
     self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_uganda.csv"
@@ -128,8 +129,8 @@ def initialize_vars(self):
     
     self.vars['kakwani_list'] = []
     
-    self.vars['start_year'] = 2024   #this may be different from the start year in globalvars.json which gets updated separately
-    self.vars['end_year']=2028
+    self.vars['start_year'] = 2022   #this may be different from the start year in globalvars.json which gets updated separately
+    self.vars['end_year']=2027
     self.vars['pit_data_start_year'] = 2021
     self.vars['cit_data_start_year'] = 2022
 
@@ -252,6 +253,7 @@ def display_entry(self, widget, tax_type):
         if tax_type == 'pit':
             self.vars['DEFAULTS_FILENAME'] = "current_law_policy_pit_armenia.json"
             self.vars['GROWFACTORS_FILENAME'] = "growfactors_pit_armenia.csv"
+            self.vars['gdp_filename'] = 'gdp_nominal_armenia.csv'
             self.vars['start_year'] = 2021
             self.vars['data_start_year'] = 2021
             self.vars['SALARY_VARIABLE'] = "SALARY"
@@ -261,7 +263,7 @@ def display_entry(self, widget, tax_type):
             
             self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_armenia.json"    
             self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_armenia.csv"
-            self.vars['start_year'] = 2024
+            self.vars['start_year'] = 2022
             self.vars['data_start_year'] = 2022
             self.vars['SALARY_VARIABLE'] = "SALARY"
             self.vars['cit_id_var'] = 'id_n'
